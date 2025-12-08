@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dance DB - Biomeccanica & Archivio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .active-move {
+            background-color: #3b82f6;
+            color: white;
+            border-right: 4px solid #1e40af;
+        }
+        .active-move p {
+            color: #dbeafe !important; /* blue-100 */
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        aside::-webkit-scrollbar { width: 4px; }
+        aside::-webkit-scrollbar-track { background: transparent; }
+        aside::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        /* Edit Mode Styles */
+        .editable-field {
+            border: 1px dashed transparent;
+            padding: 2px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .editing .editable-field {
+            border-color: #94a3b8; /* slate-400 */
+            background-color: #f1f5f9; /* slate-100 */
+            padding: 8px;
+        }
+        input.edit-input, textarea.edit-input {
+            width: 100%;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px; /* Prevent zoom on mobile */
+            color: #1e293b;
+            background: white;
+            font-family: monospace; /* Monospace per editing tecnico */
+        }
+        
+        /* Deep Search Specific Styles */
+        .deep-search-content strong {
+            font-weight: 700;
+            color: #312e81; /* indigo-900 */
+        }
+        .deep-search-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .deep-search-content li {
+            margin-bottom: 0.25rem;
+        }
+        .deep-search-content br {
+            display: block;
+            margin-bottom: 0.5rem;
+            content: "";
+        }
+
+        /* Mobile sidebar overlay backdrop */
+        #sidebar-backdrop {
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        /* Tag Colors */
+        .tag-dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .tag-green { background-color: #22c55e; }
+        .tag-darkgreen { background-color: #15803d; }
+        .tag-blue { background-color: #3b82f6; }
+        .tag-yellow { background-color: #eab308; }
+        .tag-red { background-color: #ef4444; }
+    </style>
+</head>
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Mobile Header -->
+    <header class="md:hidden bg-blue-600 text-white p-4 flex justify-between items-center shadow-md z-30 flex-shrink-0">
+        <h1 class="text-xl font-bold flex items-center gap-2">
+            <i data-lucide="database" class="w-5 h-5"></i> Dance DB
+        </h1>
+        <button id="mobile-menu-btn" class="p-2 focus:outline-none hover:bg-blue-700 rounded-lg transition-colors">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 z-20 hidden md:hidden glass transition-opacity"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="bg-white w-3/4 max-w-xs md:w-80 border-r border-gray-200 flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 fixed md:relative z-30 h-full shadow-2xl md:shadow-none top-0 left-0">
+
+        <!-- Desktop Logo Header -->
+        <div class="p-6 border-b border-gray-100 hidden md:block">
+            <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <i data-lucide="database" class="text-blue-500"></i>
+                Dance DB
+            </h1>
+            <p class="text-xs text-gray-500 mt-1">Salsa & Bachata Archive</p>
+        </div>
+
+        <!-- Mobile Sidebar Close Button Header -->
+        <div class="p-4 border-b border-gray-100 md:hidden flex justify-between items-center bg-gray-50">
+            <span class="font-bold text-gray-700">Menu</span>
+            <button id="close-sidebar-btn" class="p-2 text-gray-500 hover:bg-gray-200 rounded-full">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div class="p-4 bg-gray-50 border-b border-gray-200 space-y-3">
+            <div class="relative">
+                <i data-lucide="search" class="absolute left-3 top-3 text-gray-400 w-4 h-4"></i>
+                <input type="text" id="search-input" placeholder="Cerca mossa..."
+                    class="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+            </div>
+            <button onclick="createNewMove()" class="w-full bg-green-500 active:bg-green-600 hover:bg-green-600 text-white py-2.5 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors shadow-sm">
+                <i data-lucide="plus-circle" class="w-4 h-4"></i> Nuova Mossa
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto pb-20 md:pb-0" id="moves-list">
+            <!-- JS Injected -->
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto bg-gray-100 p-4 md:p-8 relative w-full" id="main-content">
+        <!-- Details View -->
+        <div id="move-detail" class="max-w-4xl mx-auto space-y-6 pb-24 md:pb-20 hidden">
+
+            <!-- Actions Bar -->
+            <div class="flex flex-col sm:flex-row justify-end gap-2 mb-2 sticky top-0 sm:relative z-10 bg-gray-100 py-2 sm:py-0">
+                <button id="edit-btn" onclick="toggleEditMode()" class="bg-white text-gray-700 border border-gray-300 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-50 flex items-center justify-center gap-2 shadow-sm active:bg-gray-100">
+                    <i data-lucide="pencil" class="w-4 h-4"></i> Modifica Scheda
+                </button>
+                <div id="edit-actions" class="hidden flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                    <button onclick="saveEdit()" class="bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-blue-700 flex items-center justify-center gap-2 shadow-sm active:bg-blue-800 flex-1 sm:flex-none">
+                        <i data-lucide="save" class="w-4 h-4"></i> Salva
+                    </button>
+                    <button onclick="deleteCurrentMove()" class="bg-red-50 text-red-600 border border-red-200 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-red-100 flex items-center justify-center gap-2 flex-1 sm:flex-none">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i> Elimina
+                    </button>
+                    <button onclick="cancelEdit()" class="bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-300 flex-1 sm:flex-none">
+                        Annulla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Header Card -->
+            <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 border-l-4 border-blue-500 group relative overflow-hidden">
+                <div class="flex justify-between items-start relative z-10">
+                    <div class="w-full">
+                        <div class="flex items-center gap-2 text-blue-600 font-semibold text-xs uppercase tracking-wide mb-1">
+                            <span class="bg-blue-50 px-2 py-1 rounded border border-blue-100">ID: <span id="detail-id"></span></span>
+                            <span id="detail-type" class="bg-gray-100 text-gray-600 px-2 py-1 rounded border border-gray-200"></span>
+                        </div>
+
+                        <!-- Title Field -->
+                        <div class="field-wrapper">
+                            <h2 id="detail-title" class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1 leading-tight"></h2>
+                        </div>
+
+                        <!-- Subtitle Field -->
+                        <div class="field-wrapper">
+                            <h3 id="detail-subtitle" class="text-lg text-gray-500 font-medium"></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desc Field -->
+                <div class="field-wrapper mt-4 pt-4 border-t border-gray-100">
+                    <p id="detail-desc" class="text-gray-600 italic leading-relaxed"></p>
+                </div>
+
+                <!-- Link Field -->
+                <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2">
+                    <a id="external-link" href="#" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 font-medium px-4 py-2.5 rounded-lg transition-colors active:bg-gray-200">
+                        <i data-lucide="external-link" class="w-4 h-4 text-blue-500"></i>
+                        Vedi Riferimento
+                    </a>
+                    <div id="link-edit-container" class="hidden w-full space-y-2">
+                         <input type="text" id="edit-link" placeholder="URL Esterno (es. BachataSteps)" class="edit-input text-sm">
+                         <select id="edit-type" class="edit-input text-sm">
+                            <option value="bachata">Bachata</option>
+                            <option value="salsa">Salsa</option>
+                            <option value="rueda">Rueda</option>
+                         </select>
+                         <select id="edit-tag" class="edit-input text-sm">
+                             <option value="green">Verde (Basi)</option>
+                             <option value="darkgreen">Verde Scuro (Estensioni)</option>
+                             <option value="blue">Blu (Sensual/Lento)</option>
+                             <option value="yellow">Giallo (Intermedio)</option>
+                             <option value="red">Rosso (Complesso)</option>
+                         </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <!-- Steps & Prep -->
+                <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 space-y-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="p-1.5 bg-purple-100 rounded-lg text-purple-600"><i data-lucide="footprints" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Passi</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <p id="detail-passi" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="p-1.5 bg-yellow-100 rounded-lg text-yellow-600"><i data-lucide="timer" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Preparazione</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <p id="detail-preparazione" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Command & Intention -->
+                <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 space-y-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="p-1.5 bg-green-100 rounded-lg text-green-600"><i data-lucide="hand" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Comando Manuale</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <p id="detail-comando" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="p-1.5 bg-red-100 rounded-lg text-red-600"><i data-lucide="heart" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Intenzione</h4>
+                        </div>
+                        <div class="field-wrapper">
+                            <p id="detail-intenzione" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEEP SEARCH SECTION (NEW) -->
+            <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 border-t-4 border-indigo-500">
+                <div class="flex items-center gap-2 mb-4 border-b border-indigo-50 pb-2">
+                    <div class="p-1.5 bg-indigo-100 rounded-lg text-indigo-600"><i data-lucide="brain-circuit" class="w-5 h-5"></i></div>
+                    <h4 class="font-bold text-indigo-900 text-sm uppercase tracking-wide">Analisi Biomeccanica & Deep Search</h4>
+                </div>
+                <div class="field-wrapper">
+                    <!-- This div handles HTML content -->
+                    <div id="detail-deepsearch" class="deep-search-content text-gray-700 leading-relaxed text-sm md:text-base"></div>
+                </div>
+            </div>
+
+            <!-- Private Video & Notes Section -->
+            <div class="bg-white rounded-xl shadow-sm p-5 md:p-6">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-100 pb-3">
+                    <h4 class="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                        <i data-lucide="folder-lock" class="w-6 h-6 text-orange-500"></i>
+                        Area Personale
+                    </h4>
+                    <span class="text-[10px] text-gray-400 bg-gray-50 px-2 py-1 rounded border uppercase tracking-wider">Salvato in locale</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" id="video-input" placeholder="Incolla link YouTube o URL video..."
+                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm shadow-sm">
+                        <button onclick="addPrivateVideo()" class="bg-blue-600 active:bg-blue-700 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-bold transition-colors shadow-sm w-full sm:w-auto">
+                            Aggiungi
+                        </button>
+                    </div>
+
+                    <div id="saved-video-container" class="space-y-4"></div>
+
+                    <div class="relative">
+                        <label class="block text-xs font-bold text-gray-500 mb-1 ml-1 uppercase">Le tue note:</label>
+                        <textarea id="notes-input" placeholder="Scrivi qui le tue note personali, sensazioni, correzioni..."
+                            class="w-full h-32 p-4 border border-gray-300 rounded-lg text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none leading-relaxed shadow-inner"
+                            oninput="savePrivateNotes()"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // --- DEFAULT DATA (Fallback) ---
+        const defaultMoves = [
+            {
+                id: 'b1', type: 'bachata', tag: 'green',
+                title: "Base", subtitle: "Basic Step / Paso Básico",
+                desc: "La base laterale classica.",
+                steps: "1-3: Sx lato, Dx unisce, Sx lato. 4: Tap. 5-7: Dx lato, Sx unisce, Dx lato. 8: Tap.",
+                prep: "Nessuna specifica, è il punto di partenza.",
+                cmd: "Telaio fermo. Sposto il mio intero busto laterale. Le mani seguono il corpo.",
+                intention: "Terra. Anche che disegnano un 'otto' orizzontale.",
+                link: "https://bachatasteps.com/?search=basic",
+                videos: [], notes: "",
+                deepSearch: "<strong>Analisi Tecnica:</strong> Il passo base non è solo un movimento laterale, ma un trasferimento di peso completo..."
+            }
+        ];
+
+        // --- STATE & STORAGE ---
+        let moves = [];
+        let activeId = null;
+        const LS_KEY = 'bachata_db_data_v2'; 
+
+        // --- DOM Elements ---
+        const els = {
+            list: document.getElementById('moves-list'),
+            sidebar: document.getElementById('sidebar'),
+            detail: document.getElementById('move-detail'),
+            idDisplay: document.getElementById('detail-id'),
+            typeDisplay: document.getElementById('detail-type'),
+            title: document.getElementById('detail-title'),
+            subtitle: document.getElementById('detail-subtitle'),
+            desc: document.getElementById('detail-desc'),
+            link: document.getElementById('external-link'),
+            linkEditContainer: document.getElementById('link-edit-container'),
+            editLinkInput: document.getElementById('edit-link'),
+            editTypeInput: document.getElementById('edit-type'),
+            editTagInput: document.getElementById('edit-tag'),
+            passi: document.getElementById('detail-passi'),
+            prep: document.getElementById('detail-preparazione'),
+            cmd: document.getElementById('detail-comando'),
+            intention: document.getElementById('detail-intenzione'),
+            deepSearch: document.getElementById('detail-deepsearch'),
+            videoInput: document.getElementById('video-input'),
+            notesInput: document.getElementById('notes-input'),
+            videoContainer: document.getElementById('saved-video-container'),
+            editBtn: document.getElementById('edit-btn'),
+            editActions: document.getElementById('edit-actions'),
+            searchInput: document.getElementById('search-input'),
+            mobileMenu: document.getElementById('mobile-menu-btn'),
+            closeSidebar: document.getElementById('close-sidebar-btn'),
+            backdrop: document.getElementById('sidebar-backdrop')
+        };
+
+        // --- INIT ---
+        function init() {
+            const savedData = localStorage.getItem(LS_KEY);
+            if (savedData) {
+                moves = JSON.parse(savedData);
+                if (!Array.isArray(moves) || moves.length === 0) moves = JSON.parse(JSON.stringify(defaultMoves));
+            } else {
+                moves = JSON.parse(JSON.stringify(defaultMoves));
+                saveData(); 
+            }
+
+            // Ensure compatibility if new fields missing
+            moves.forEach(m => {
+                if(!m.type) m.type = 'bachata';
+                if(!m.tag) m.tag = 'green';
+                if(!m.deepSearch) m.deepSearch = "";
+            });
+
+            renderList(moves);
+            if(moves.length > 0) loadMove(moves[0].id);
+            lucide.createIcons();
+
+            els.searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = moves.filter(m =>
+                    m.title.toLowerCase().includes(term) ||
+                    m.subtitle.toLowerCase().includes(term)
+                );
+                renderList(filtered);
+            });
+
+            els.mobileMenu.addEventListener('click', openSidebar);
+            els.closeSidebar.addEventListener('click', closeSidebar);
+            els.backdrop.addEventListener('click', closeSidebar);
+        }
+
+        function openSidebar() {
+            els.sidebar.classList.remove('-translate-x-full');
+            els.backdrop.classList.remove('hidden');
+        }
+        function closeSidebar() {
+            els.sidebar.classList.add('-translate-x-full');
+            els.backdrop.classList.add('hidden');
+        }
+
+        // --- CORE FUNCTIONS ---
+        function saveData() {
+            localStorage.setItem(LS_KEY, JSON.stringify(moves));
+        }
+
+        function renderList(data) {
+            els.list.innerHTML = '';
+            data.forEach((move, index) => {
+                const isActive = move.id === activeId;
+                const div = document.createElement('div');
+                div.className = `p-4 cursor-pointer hover:bg-gray-50 border-l-4 border-transparent transition-all border-b border-gray-100 ${isActive ? 'active-move' : ''}`;
+                
+                // Determine Tag Color
+                const tagColorClass = `tag-${move.tag || 'green'}`;
+
+                div.onclick = () => {
+                    loadMove(move.id);
+                    if (window.innerWidth < 768) closeSidebar();
+                };
+
+                div.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-sm truncate pr-2 flex items-center gap-2">
+                            <span class="tag-dot ${tagColorClass}"></span>
+                            ${move.title}
+                        </span>
+                        ${(move.videos && move.videos.length > 0) ? '<i data-lucide="video" class="w-3 h-3 text-blue-300"></i>' : ''}
+                    </div>
+                    <p class="text-xs ${isActive ? '' : 'text-gray-400'} truncate pl-6 mt-0.5">${move.subtitle}</p>
+                `;
+                els.list.appendChild(div);
+            });
+            lucide.createIcons();
+        }
+
+        function loadMove(id) {
+            cancelEdit();
+            activeId = id;
+            const move = moves.find(m => m.id === id);
+            if(!move) return;
+
+            els.detail.classList.remove('hidden');
+            renderList(moves); 
+
+            // Fill Fields
+            els.idDisplay.innerText = move.id;
+            els.typeDisplay.innerText = move.type ? move.type.toUpperCase() : "BACHATA";
+            els.title.innerText = move.title;
+            els.subtitle.innerText = move.subtitle;
+            els.desc.innerText = move.desc;
+
+            els.passi.innerText = move.steps;
+            els.prep.innerText = move.prep;
+            els.cmd.innerText = move.cmd;
+            els.intention.innerText = move.intention;
+            
+            // Deep Search (HTML)
+            els.deepSearch.innerHTML = move.deepSearch || "<em class='text-gray-400'>Nessuna analisi approfondita disponibile.</em>";
+
+            // Edit Fields Hidden Inputs
+            els.editLinkInput.value = move.link || "";
+            els.editTypeInput.value = move.type || "bachata";
+            els.editTagInput.value = move.tag || "green";
+
+            if (move.link) {
+                els.link.href = move.link;
+                els.link.classList.remove('hidden');
+            } else {
+                els.link.classList.add('hidden');
+            }
+
+            els.notesInput.value = move.notes || "";
+            renderVideos(move.videos || []);
+
+            document.getElementById('main-content').scrollTop = 0;
+        }
+
+        // --- EDITING ---
+        let isEditing = false;
+
+        function toggleEditMode() {
+            isEditing = true;
+            els.detail.classList.add('editing');
+            els.editBtn.parentElement.classList.add('hidden');
+            els.editBtn.classList.add('hidden');
+            els.editActions.classList.remove('hidden');
+
+            makeEditable(els.title, 'input');
+            makeEditable(els.subtitle, 'input');
+            makeEditable(els.desc, 'textarea');
+            makeEditable(els.passi, 'textarea');
+            makeEditable(els.prep, 'textarea');
+            makeEditable(els.cmd, 'textarea');
+            makeEditable(els.intention, 'textarea');
+            
+            // Special handling for HTML content in Deep Search
+            makeEditable(els.deepSearch, 'textarea', true);
+
+            els.link.classList.add('hidden');
+            els.linkEditContainer.classList.remove('hidden');
+        }
+
+        function makeEditable(element, type, isHTML = false) {
+            const currentText = isHTML ? element.innerHTML : element.innerText;
+            const input = document.createElement(type);
+            input.className = 'edit-input';
+            input.value = currentText;
+            if(type === 'textarea') input.rows = 6;
+            
+            // If it's Deep Search, make it taller
+            if(isHTML) input.rows = 15;
+
+            element.innerHTML = '';
+            element.appendChild(input);
+        }
+
+        function cancelEdit() {
+            if(!isEditing) return;
+            isEditing = false;
+            els.detail.classList.remove('editing');
+            els.editBtn.classList.remove('hidden');
+            els.editBtn.parentElement.classList.remove('hidden');
+            els.editActions.classList.add('hidden');
+            els.linkEditContainer.classList.add('hidden');
+            if(activeId) loadMove(activeId);
+        }
+
+        function saveEdit() {
+            const moveIndex = moves.findIndex(m => m.id === activeId);
+            if (moveIndex === -1) return;
+
+            // Simple fields
+            moves[moveIndex].title = els.title.querySelector('.edit-input').value;
+            moves[moveIndex].subtitle = els.subtitle.querySelector('.edit-input').value;
+            moves[moveIndex].desc = els.desc.querySelector('.edit-input').value;
+            moves[moveIndex].steps = els.passi.querySelector('.edit-input').value;
+            moves[moveIndex].prep = els.prep.querySelector('.edit-input').value;
+            moves[moveIndex].cmd = els.cmd.querySelector('.edit-input').value;
+            moves[moveIndex].intention = els.intention.querySelector('.edit-input').value;
+            
+            // Deep Search (HTML)
+            moves[moveIndex].deepSearch = els.deepSearch.querySelector('.edit-input').value;
+
+            // Metadata
+            moves[moveIndex].link = els.editLinkInput.value;
+            moves[moveIndex].type = els.editTypeInput.value;
+            moves[moveIndex].tag = els.editTagInput.value;
+
+            saveData();
+            isEditing = false;
+            els.detail.classList.remove('editing');
+            els.editBtn.classList.remove('hidden');
+            els.editBtn.parentElement.classList.remove('hidden');
+            els.editActions.classList.add('hidden');
+            els.linkEditContainer.classList.add('hidden');
+
+            loadMove(activeId);
+        }
+
+        // --- CREATION & DELETION ---
+        function createNewMove() {
+            const newId = "m" + Date.now();
+            const newMove = {
+                id: newId,
+                type: 'bachata',
+                tag: 'green',
+                title: "Nuova Mossa",
+                subtitle: "Clicca modifica per iniziare",
+                desc: "Descrizione breve...",
+                steps: "Descrivi i passi...",
+                prep: "Descrivi la preparazione...",
+                cmd: "Descrivi il comando...",
+                intention: "Descrivi l'intenzione...",
+                link: "",
+                videos: [],
+                notes: "",
+                deepSearch: "Incolla qui l'analisi approfondita della Gem..."
+            };
+            moves.unshift(newMove);
+            saveData();
+            renderList(moves);
+            loadMove(newId);
+            toggleEditMode();
+            if (window.innerWidth < 768) closeSidebar();
+        }
+
+        function deleteCurrentMove() {
+            if(!confirm("Sei sicuro di voler eliminare questa mossa?")) return;
+            moves = moves.filter(m => m.id !== activeId);
+            saveData();
+            if (moves.length > 0) {
+                renderList(moves);
+                loadMove(moves[0].id);
+            } else {
+                location.reload();
+            }
+        }
+
+        // --- PRIVATE DATA ---
+        function savePrivateNotes() {
+            const move = moves.find(m => m.id === activeId);
+            if (move) {
+                move.notes = els.notesInput.value;
+                saveData();
+            }
+        }
+
+        function addPrivateVideo() {
+            const url = els.videoInput.value.trim();
+            if(!url) return;
+            const move = moves.find(m => m.id === activeId);
+            if (move) {
+                if(!move.videos) move.videos = [];
+                move.videos.push(url);
+                saveData();
+                renderVideos(move.videos);
+                renderList(moves);
+                els.videoInput.value = '';
+            }
+        }
+
+        function deleteVideo(index) {
+            const move = moves.find(m => m.id === activeId);
+            if (move && move.videos) {
+                move.videos.splice(index, 1);
+                saveData();
+                renderVideos(move.videos);
+                renderList(moves);
+            }
+        }
+
+        function renderVideos(videoList) {
+            els.videoContainer.innerHTML = '';
+            if(!videoList || videoList.length === 0) return;
+
+            videoList.forEach((url, idx) => {
+                const vidDiv = document.createElement('div');
+                vidDiv.className = "bg-gray-50 border border-gray-200 rounded-lg p-3 relative group";
+                const youtubeID = getYoutubeID(url);
+                let content = '';
+
+                if (youtubeID) {
+                    content = `
+                        <div class="video-container aspect-video mb-2 shadow-sm">
+                            <iframe src="https://www.youtube.com/embed/${youtubeID}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    `;
+                } else {
+                    content = `
+                        <a href="${url}" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline break-all mb-8 font-bold text-sm bg-white p-3 rounded border">
+                            <i data-lucide="link" class="w-4 h-4 flex-shrink-0"></i>
+                            LINK ESTERNO
+                        </a>
+                    `;
+                }
+
+                vidDiv.innerHTML = `
+                    ${content}
+                    <button onclick="deleteVideo(${idx})" class="absolute top-2 right-2 bg-white text-red-500 p-2 rounded shadow hover:bg-red-50 transition-colors z-10" title="Rimuovi video">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                `;
+                els.videoContainer.appendChild(vidDiv);
+            });
+            lucide.createIcons();
+        }
+
+        function getYoutubeID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        init();
+    </script>
+</body>
+</html>
