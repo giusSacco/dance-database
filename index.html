@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dance DB - Biomeccanica & Archivio</title>
+    <title>Dance DB: Salsa & Bachata</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -13,77 +14,60 @@
             -webkit-tap-highlight-color: transparent;
         }
         .active-move {
-            background-color: #3b82f6;
-            color: white;
-            border-right: 4px solid #1e40af;
+            background-color: #eff6ff; /* blue-50 */
+            border-right: 4px solid #3b82f6;
         }
-        .active-move p {
-            color: #dbeafe !important; /* blue-100 */
-        }
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
-            border-radius: 0.5rem;
-        }
+        /* Custom scrollbar */
         aside::-webkit-scrollbar { width: 4px; }
         aside::-webkit-scrollbar-track { background: transparent; }
         aside::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-
+        
         /* Edit Mode Styles */
-        .editable-field {
-            border: 1px dashed transparent;
-            padding: 2px;
-            border-radius: 4px;
+        .editable-field { border: 1px dashed transparent; padding: 2px; border-radius: 4px; transition: all 0.2s; }
+        .editing .editable-field { border-color: #94a3b8; background-color: #f1f5f9; padding: 8px; }
+        input.edit-input, textarea.edit-input { width: 100%; border: 2px solid #3b82f6; border-radius: 8px; padding: 12px; font-size: 16px; color: #1e293b; background: white; margin-bottom: 4px; }
+        #sidebar-backdrop { background-color: rgba(0,0,0,0.5); }
+        
+        /* Category Stripes */
+        .cat-green { background-color: #22c55e; }
+        .cat-darkgreen { background-color: #15803d; }
+        .cat-blue { background-color: #3b82f6; }
+        .cat-yellow { background-color: #eab308; }
+        .cat-red { background-color: #ef4444; }
+        
+        /* Filter Chips */
+        .filter-chip {
+            white-space: nowrap;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            color: #4b5563;
+            cursor: pointer;
             transition: all 0.2s;
         }
-        .editing .editable-field {
-            border-color: #94a3b8; /* slate-400 */
-            background-color: #f1f5f9; /* slate-100 */
-            padding: 8px;
+        .filter-chip.active {
+            border-color: transparent;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        input.edit-input, textarea.edit-input {
-            width: 100%;
-            border: 2px solid #3b82f6;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 16px; /* Prevent zoom on mobile */
-            color: #1e293b;
-            background: white;
-            font-family: monospace; /* Monospace per editing tecnico */
-        }
-        
-        /* Deep Search Specific Styles */
-        .deep-search-content strong {
-            font-weight: 700;
-            color: #312e81; /* indigo-900 */
-        }
-        .deep-search-content ul {
-            list-style-type: disc;
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .deep-search-content li {
-            margin-bottom: 0.25rem;
-        }
-        .deep-search-content br {
-            display: block;
-            margin-bottom: 0.5rem;
-            content: "";
-        }
+        .filter-chip.active.f-all { background-color: #4b5563; }
+        .filter-chip.active.f-green { background-color: #22c55e; }
+        .filter-chip.active.f-darkgreen { background-color: #15803d; }
+        .filter-chip.active.f-blue { background-color: #3b82f6; }
+        .filter-chip.active.f-yellow { background-color: #eab308; }
+        .filter-chip.active.f-red { background-color: #ef4444; }
 
-        /* Mobile sidebar overlay backdrop */
-        #sidebar-backdrop {
-            background-color: rgba(0,0,0,0.5);
-        }
-        
-        /* Tag Colors */
-        .tag-dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-        .tag-green { background-color: #22c55e; }
-        .tag-darkgreen { background-color: #15803d; }
-        .tag-blue { background-color: #3b82f6; }
-        .tag-yellow { background-color: #eab308; }
-        .tag-red { background-color: #ef4444; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .ai-gradient-border { position: relative; background: white; border-radius: 0.75rem; z-index: 1; }
+        .ai-gradient-border::before { content: ""; position: absolute; inset: -2px; border-radius: 0.85rem; background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899); z-index: -1; opacity: 0.5; }
+        .shimmer { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body class="h-screen flex flex-col md:flex-row overflow-hidden">
@@ -91,7 +75,7 @@
     <!-- Mobile Header -->
     <header class="md:hidden bg-blue-600 text-white p-4 flex justify-between items-center shadow-md z-30 flex-shrink-0">
         <h1 class="text-xl font-bold flex items-center gap-2">
-            <i data-lucide="database" class="w-5 h-5"></i> Dance DB
+            <i data-lucide="music-2" class="w-5 h-5"></i> Dance DB
         </h1>
         <button id="mobile-menu-btn" class="p-2 focus:outline-none hover:bg-blue-700 rounded-lg transition-colors">
             <i data-lucide="menu" class="w-6 h-6"></i>
@@ -102,29 +86,39 @@
     <div id="sidebar-backdrop" class="fixed inset-0 z-20 hidden md:hidden glass transition-opacity"></div>
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="bg-white w-3/4 max-w-xs md:w-80 border-r border-gray-200 flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 fixed md:relative z-30 h-full shadow-2xl md:shadow-none top-0 left-0">
+    <aside id="sidebar" class="bg-white w-3/4 max-w-xs md:w-80 border-r border-gray-200 block overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 fixed md:relative z-30 h-full shadow-2xl md:shadow-none top-0 left-0">
+        
+        <!-- Header Controls -->
+        <div class="p-4 md:p-6 border-b border-gray-100 flex-shrink-0 bg-white sticky top-0 z-20">
+            <div class="hidden md:flex items-center gap-2 mb-4">
+                <i data-lucide="music-2" class="text-blue-500 w-6 h-6"></i>
+                <h1 class="text-2xl font-bold text-gray-800">Dance DB</h1>
+            </div>
+            
+            <div class="relative mb-3">
+                <select id="category-select" onchange="changeCategory()" class="w-full appearance-none bg-blue-50 border border-blue-200 text-blue-700 py-2 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 font-bold cursor-pointer">
+                    <option value="bachata">Bachata</option>
+                    <option value="salsa">Salsa Cubana</option>
+                    <option value="rueda">Salsa Rueda</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </div>
+            </div>
 
-        <!-- Desktop Logo Header -->
-        <div class="p-6 border-b border-gray-100 hidden md:block">
-            <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                <i data-lucide="database" class="text-blue-500"></i>
-                Dance DB
-            </h1>
-            <p class="text-xs text-gray-500 mt-1">Salsa & Bachata Archive</p>
-        </div>
+            <!-- Filters Bar -->
+            <div class="flex gap-2 overflow-x-auto no-scrollbar mb-3 pb-1" id="filter-container">
+                <button onclick="applyFilter('all')" class="filter-chip f-all active" data-filter="all">Tutti</button>
+                <button onclick="applyFilter('green')" class="filter-chip f-green" data-filter="green">Basi</button>
+                <button onclick="applyFilter('darkgreen')" class="filter-chip f-darkgreen" data-filter="darkgreen">Giri</button>
+                <button onclick="applyFilter('blue')" class="filter-chip f-blue" data-filter="blue">Lenti</button>
+                <button onclick="applyFilter('yellow')" class="filter-chip f-yellow" data-filter="yellow">Figure</button>
+                <button onclick="applyFilter('red')" class="filter-chip f-red" data-filter="red">Hard</button>
+            </div>
 
-        <!-- Mobile Sidebar Close Button Header -->
-        <div class="p-4 border-b border-gray-100 md:hidden flex justify-between items-center bg-gray-50">
-            <span class="font-bold text-gray-700">Menu</span>
-            <button id="close-sidebar-btn" class="p-2 text-gray-500 hover:bg-gray-200 rounded-full">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-        </div>
-
-        <div class="p-4 bg-gray-50 border-b border-gray-200 space-y-3">
-            <div class="relative">
+            <div class="relative mb-3">
                 <i data-lucide="search" class="absolute left-3 top-3 text-gray-400 w-4 h-4"></i>
-                <input type="text" id="search-input" placeholder="Cerca mossa..."
+                <input type="text" id="search-input" placeholder="Cerca mossa..." 
                     class="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
             </div>
             <button onclick="createNewMove()" class="w-full bg-green-500 active:bg-green-600 hover:bg-green-600 text-white py-2.5 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors shadow-sm">
@@ -132,17 +126,38 @@
             </button>
         </div>
 
-        <nav class="flex-1 overflow-y-auto pb-20 md:pb-0" id="moves-list">
-            <!-- JS Injected -->
-        </nav>
+        <!-- Mobile Sidebar Close Button -->
+        <div class="absolute top-2 right-2 md:hidden z-30">
+            <button id="close-sidebar-btn" class="p-2 text-gray-500 hover:bg-gray-200 rounded-full">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Moves List -->
+        <nav id="moves-list" class="pb-4"></nav>
+
+        <!-- Footer Actions -->
+        <div class="p-4 border-t border-gray-200 bg-gray-50 mt-auto sticky bottom-0 z-20">
+            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Dati</h4>
+            <div class="flex gap-2">
+                <button onclick="exportData()" class="flex-1 bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 rounded-lg text-xs font-bold flex flex-col items-center gap-1 transition-colors shadow-sm">
+                    <i data-lucide="download" class="w-4 h-4 text-blue-500"></i>
+                    Esporta
+                </button>
+                <button onclick="triggerImport()" class="flex-1 bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 rounded-lg text-xs font-bold flex flex-col items-center gap-1 transition-colors shadow-sm">
+                    <i data-lucide="upload" class="w-4 h-4 text-orange-500"></i>
+                    Importa
+                </button>
+                <input type="file" id="import-file" class="hidden" accept=".json" onchange="importData(this)">
+            </div>
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto bg-gray-100 p-4 md:p-8 relative w-full" id="main-content">
-        <!-- Details View -->
         <div id="move-detail" class="max-w-4xl mx-auto space-y-6 pb-24 md:pb-20 hidden">
-
-            <!-- Actions Bar -->
+            
+            <!-- Actions -->
             <div class="flex flex-col sm:flex-row justify-end gap-2 mb-2 sticky top-0 sm:relative z-10 bg-gray-100 py-2 sm:py-0">
                 <button id="edit-btn" onclick="toggleEditMode()" class="bg-white text-gray-700 border border-gray-300 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-50 flex items-center justify-center gap-2 shadow-sm active:bg-gray-100">
                     <i data-lucide="pencil" class="w-4 h-4"></i> Modifica Scheda
@@ -160,53 +175,61 @@
                 </div>
             </div>
 
-            <!-- Header Card -->
             <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 border-l-4 border-blue-500 group relative overflow-hidden">
+                <div id="detail-color-tag" class="absolute top-0 right-0 w-24 h-24 transform translate-x-12 -translate-y-12 rotate-45 opacity-20"></div>
+
                 <div class="flex justify-between items-start relative z-10">
                     <div class="w-full">
                         <div class="flex items-center gap-2 text-blue-600 font-semibold text-xs uppercase tracking-wide mb-1">
                             <span class="bg-blue-50 px-2 py-1 rounded border border-blue-100">ID: <span id="detail-id"></span></span>
-                            <span id="detail-type" class="bg-gray-100 text-gray-600 px-2 py-1 rounded border border-gray-200"></span>
+                            <span id="detail-category" class="uppercase"></span>
                         </div>
-
-                        <!-- Title Field -->
                         <div class="field-wrapper">
-                            <h2 id="detail-title" class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1 leading-tight"></h2>
+                            <h2 id="detail-title" class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1 leading-tight flex items-center gap-2">
+                                <span id="detail-title-text"></span>
+                            </h2>
                         </div>
-
-                        <!-- Subtitle Field -->
                         <div class="field-wrapper">
                             <h3 id="detail-subtitle" class="text-lg text-gray-500 font-medium"></h3>
                         </div>
                     </div>
                 </div>
-
-                <!-- Desc Field -->
-                <div class="field-wrapper mt-4 pt-4 border-t border-gray-100">
+                
+                <div class="field-wrapper mt-4 pt-4 border-t border-gray-100 relative z-10">
                     <p id="detail-desc" class="text-gray-600 italic leading-relaxed"></p>
                 </div>
 
-                <!-- Link Field -->
-                <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                    <a id="external-link" href="#" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 font-medium px-4 py-2.5 rounded-lg transition-colors active:bg-gray-200">
+                <!-- Link Field & AI -->
+                <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 flex-wrap relative z-10">
+                    <a id="ext-link" href="#" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 font-medium px-4 py-2.5 rounded-lg transition-colors active:bg-gray-200">
                         <i data-lucide="external-link" class="w-4 h-4 text-blue-500"></i>
-                        Vedi Riferimento
+                        <span id="ext-link-text">Vedi riferimento</span>
                     </a>
-                    <div id="link-edit-container" class="hidden w-full space-y-2">
-                         <input type="text" id="edit-link" placeholder="URL Esterno (es. BachataSteps)" class="edit-input text-sm">
-                         <select id="edit-type" class="edit-input text-sm">
-                            <option value="bachata">Bachata</option>
-                            <option value="salsa">Salsa</option>
-                            <option value="rueda">Rueda</option>
-                         </select>
-                         <select id="edit-tag" class="edit-input text-sm">
-                             <option value="green">Verde (Basi)</option>
-                             <option value="darkgreen">Verde Scuro (Estensioni)</option>
-                             <option value="blue">Blu (Sensual/Lento)</option>
-                             <option value="yellow">Giallo (Intermedio)</option>
-                             <option value="red">Rosso (Complesso)</option>
-                         </select>
+                    
+                    <button onclick="askGemini()" id="ai-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold px-4 py-2.5 rounded-lg transition-colors shadow-sm">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        Chiedi all'IA
+                    </button>
+
+                    <div id="link-edit-container" class="hidden w-full">
+                        <input type="text" id="edit-link" placeholder="URL riferimento (es. https://...)" class="edit-input text-sm">
                     </div>
+                </div>
+            </div>
+
+            <!-- AI Response Section -->
+            <div id="ai-section" class="hidden ai-gradient-border p-6 shadow-md transition-all">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="p-1.5 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg text-purple-600">
+                        <i data-lucide="bot" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800">Il Maestro IA consiglia:</h4>
+                </div>
+                <div id="ai-content" class="text-gray-700 text-sm md:text-base leading-relaxed prose prose-sm max-w-none"></div>
+                <div id="ai-loading" class="hidden space-y-3">
+                    <div class="h-4 bg-gray-200 rounded shimmer w-3/4"></div>
+                    <div class="h-4 bg-gray-200 rounded shimmer w-1/2"></div>
+                    <div class="h-4 bg-gray-200 rounded shimmer w-5/6"></div>
                 </div>
             </div>
 
@@ -220,17 +243,17 @@
                             <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Passi</h4>
                         </div>
                         <div class="field-wrapper">
-                            <p id="detail-passi" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                            <p id="detail-passi" class="text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line"></p>
                         </div>
                     </div>
-
+                    
                     <div class="pt-4 border-t border-gray-100">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="p-1.5 bg-yellow-100 rounded-lg text-yellow-600"><i data-lucide="timer" class="w-5 h-5"></i></div>
                             <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Preparazione</h4>
                         </div>
                         <div class="field-wrapper">
-                            <p id="detail-preparazione" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                            <p id="detail-preparazione" class="text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line"></p>
                         </div>
                     </div>
                 </div>
@@ -243,7 +266,7 @@
                             <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Comando Manuale</h4>
                         </div>
                         <div class="field-wrapper">
-                            <p id="detail-comando" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                            <p id="detail-comando" class="text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line"></p>
                         </div>
                     </div>
 
@@ -253,21 +276,21 @@
                             <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Intenzione</h4>
                         </div>
                         <div class="field-wrapper">
-                            <p id="detail-intenzione" class="text-gray-700 leading-relaxed text-sm md:text-base"></p>
+                            <p id="detail-intenzione" class="text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line"></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- DEEP SEARCH SECTION (NEW) -->
-            <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 border-t-4 border-indigo-500">
-                <div class="flex items-center gap-2 mb-4 border-b border-indigo-50 pb-2">
-                    <div class="p-1.5 bg-indigo-100 rounded-lg text-indigo-600"><i data-lucide="brain-circuit" class="w-5 h-5"></i></div>
-                    <h4 class="font-bold text-indigo-900 text-sm uppercase tracking-wide">Analisi Biomeccanica & Deep Search</h4>
+            <!-- DeepSearch Notes Section (Moved to Bottom) -->
+            <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 border-l-4 border-purple-500">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="p-1.5 bg-purple-100 rounded-lg text-purple-600"><i data-lucide="brain" class="w-5 h-5"></i></div>
+                    <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Approfondimento Tecnico (DeepSearch)</h4>
                 </div>
-                <div class="field-wrapper">
-                    <!-- This div handles HTML content -->
-                    <div id="detail-deepsearch" class="deep-search-content text-gray-700 leading-relaxed text-sm md:text-base"></div>
+                <div class="field-wrapper bg-purple-50 p-4 rounded-lg border border-purple-100">
+                    <p id="detail-deepsearch" class="text-gray-700 text-sm leading-relaxed whitespace-pre-line empty:hidden"></p>
+                    <span id="deepsearch-placeholder" class="text-gray-400 text-xs italic">Nessuna nota extra. Modifica per aggiungere.</span>
                 </div>
             </div>
 
@@ -280,21 +303,21 @@
                     </h4>
                     <span class="text-[10px] text-gray-400 bg-gray-50 px-2 py-1 rounded border uppercase tracking-wider">Salvato in locale</span>
                 </div>
-
+                
                 <div class="space-y-4">
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <input type="text" id="video-input" placeholder="Incolla link YouTube o URL video..."
+                        <input type="text" id="video-input" placeholder="Incolla link YouTube o URL video..." 
                             class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm shadow-sm">
                         <button onclick="addPrivateVideo()" class="bg-blue-600 active:bg-blue-700 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-bold transition-colors shadow-sm w-full sm:w-auto">
                             Aggiungi
                         </button>
                     </div>
-
+                    
                     <div id="saved-video-container" class="space-y-4"></div>
-
+                    
                     <div class="relative">
                         <label class="block text-xs font-bold text-gray-500 mb-1 ml-1 uppercase">Le tue note:</label>
-                        <textarea id="notes-input" placeholder="Scrivi qui le tue note personali, sensazioni, correzioni..."
+                        <textarea id="notes-input" placeholder="Scrivi qui le tue note personali, sensazioni, correzioni..." 
                             class="w-full h-32 p-4 border border-gray-300 rounded-lg text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none leading-relaxed shadow-inner"
                             oninput="savePrivateNotes()"></textarea>
                     </div>
@@ -305,47 +328,117 @@
     </main>
 
     <script>
-        // --- DEFAULT DATA (Fallback) ---
-        const defaultMoves = [
-            {
-                id: 'b1', type: 'bachata', tag: 'green',
-                title: "Base", subtitle: "Basic Step / Paso Básico",
-                desc: "La base laterale classica.",
-                steps: "1-3: Sx lato, Dx unisce, Sx lato. 4: Tap. 5-7: Dx lato, Sx unisce, Dx lato. 8: Tap.",
-                prep: "Nessuna specifica, è il punto di partenza.",
-                cmd: "Telaio fermo. Sposto il mio intero busto laterale. Le mani seguono il corpo.",
-                intention: "Terra. Anche che disegnano un 'otto' orizzontale.",
-                link: "https://bachatasteps.com/?search=basic",
-                videos: [], notes: "",
-                deepSearch: "<strong>Analisi Tecnica:</strong> Il passo base non è solo un movimento laterale, ma un trasferimento di peso completo..."
-            }
+        const apiKey = ""; 
+
+        const b_links = {
+            1: "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link",
+            2: "https://drive.google.com/file/d/1rOp5-IgKzGdVSJf5JnPUXHNaP67iKUV3/view?usp=drive_link",
+            3: "https://drive.google.com/file/d/1CbbMqyHj-IXojAJKoq1SjkfnM76zsmXS/view?usp=drive_link",
+            4: "https://drive.google.com/file/d/1r2TjL0cuHdR4TsJYegcrsz8sc7Si72uY/view?usp=drive_link",
+            6: "https://drive.google.com/file/d/1M-pasIthL5wLuSCwhOyx-NkP5DZgJGqQ/view?usp=drive_link",
+            7: "https://drive.google.com/file/d/1bOUQqphOk-ErEuuq3dY70qnNnjsz1XSQ/view?usp=drive_link",
+            8: "https://drive.google.com/file/d/1MdS7Nb6Leyx6X1-ia0giEwaOw68xAvx5/view?usp=drive_link"
+        };
+
+        const s_links = {
+            1: "https://drive.google.com/file/d/1Erfo0sqzGKSR4L6Qjb0ywIwSU5WUGs57/view?usp=drive_link",
+            2: "https://drive.google.com/file/d/1wKyH6LaSGW5sHk2Va08o5e8mfjTtnXP3/view?usp=drive_link",
+            3: "https://drive.google.com/file/d/1Vodv5u5RgbdnG7Z7oVcs5d9OTeWH_lMB/view?usp=drive_link",
+            4: "https://drive.google.com/file/d/1Mq_VDYqlH7Hy_E9yLSbHXdpclXprAxhq/view?usp=drive_link",
+            5: "https://drive.google.com/file/d/1vjNgAV7oL71EXeKYucR87oyo-Trj_tHU/view?usp=drive_link",
+            6: "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
+        };
+
+        const bachataMoves = [
+            { id: 'b1', type: 'bachata', tag: 'green', title: "Base", subtitle: "Basic Step", desc: "La base laterale classica.", steps: "1-3: Sx lato, Dx unisce, Sx lato.\n4: Tap.\n5-7: Dx lato, Sx unisce, Dx lato.\n8: Tap.", prep: "Nessuna specifica.", cmd: "Tempo 1: Sposto il mio intero busto laterale.", intention: "Terra. Disegnare un 'otto' con le anche.", link: "https://bachatasteps.com/?search=basic+step", videos: [b_links[1]], notes: "", deepSearch: "Criticità: gestione microscopica spazio e timing trasferimento carico. Errore comune: 'arm leading' (muovere braccia prima del corpo). Tecnica avanzata: visualizzare movimento come blocco unico, impulso dal core. Conteggi 4/8 (Tap): NON trasferire peso, tallone staccato, preservare energia potenziale. Connessione visiva: altezza occhi/spalla." },
+            { id: 'b2', type: 'bachata', tag: 'blue', title: "Sul Posto", subtitle: "In Place", desc: "Base statica per recuperare o marcare il ritmo.", steps: "Tap-step alternato senza traslare.", prep: "Tempo 4 o 8: Arresto l'inerzia laterale.", cmd: "Tempo 1: Rilasso la tensione del telaio.", intention: "Controllo.", link: "https://bachatasteps.com/?search=in+place", videos: [b_links[1]], notes: "", deepSearch: "" },
+            { id: 'b3', type: 'bachata', tag: 'blue', title: "Doppio Tempo", subtitle: "Double Time (Body Movement)", desc: "Movimento del corpo su musica lenta, senza passi reali.", steps: "Nessun passo, solo isolamento corporeo (anche/busto).", prep: "Rallentamento musicale.", cmd: "Blocco i piedi, muovo il busto/bacino a tempo doppio rispetto alla base.", intention: "Musicalità su parti lente.", link: "https://bachatasteps.com/?search=syncopated", videos: [b_links[1]], notes: "", deepSearch: "" },
+            { id: 'b4', type: 'bachata', tag: 'darkgreen', title: "Doppio Passo", subtitle: "Double Step", desc: "Due passi sullo stesso lato o punto.", steps: "Marco due volte a destra (o sinistra).", prep: "Tempo 4: Blocco il flusso.", cmd: "Tempo 1: 'Muro' con la mano per impedire lo spostamento.", intention: "Gioco. Sorpresa.", link: "https://bachatasteps.com/?search=double+step", videos: [b_links[1]], notes: "", deepSearch: "" },
+            { id: 'b5', type: 'bachata', tag: 'green', title: "Avanti", subtitle: "Forward Basic", desc: "Base lineare avanti/indietro.", steps: "Uomo avanza sul 1, Donna indietreggia.", prep: "Tempo 8: Cambio peso leggermente sulle punte.", cmd: "Tempo 1: Spingo avanti con il petto. Tempo 5: Traziono indietro col telaio.", intention: "Dialogo.", link: "https://bachatasteps.com/?search=forward+basic", videos: [b_links[1]], notes: "", deepSearch: "Criticità: perdita tensione punti inversione (4-1, 8-5). Lead come ammortizzatore: assorbire energia e rimbalzare. Evitare 'pendolarismo' busto (leaning). Mano schiena: non afferrare, spinta distribuita base palmo." },
+            { id: 'b6', type: 'bachata', tag: 'darkgreen', title: "Giro Mano Bassa", subtitle: "Low Hand Turn", desc: "Giro semplice mantenendo le mani basse.", steps: "Giro sul 1-2-3 o 5-6-7.", prep: "Tempo 4: Caricamento laterale opposto.", cmd: "Tempo 1 o 5: Guida circolare all'altezza della vita.", intention: "Fluidità.", link: "https://bachatasteps.com/?search=turn", videos: [b_links[1]], notes: "", deepSearch: "" },
+            { id: 'b7', type: 'bachata', tag: 'darkgreen', title: "Giro Mano Alta", subtitle: "High Turn", desc: "Classico giro sottobraccio.", steps: "Giro sul 1-2-3 o 5-6-7.", prep: "Tempo 4: Alzo il braccio creando arco.", cmd: "Tempo 1 o 5: Disegno aureola sopra la testa.", intention: "Eleganza.", link: "https://bachatasteps.com/?search=turn", videos: [b_links[1]], notes: "", deepSearch: "" },
+            { id: 'b8', type: 'bachata', tag: 'darkgreen', title: "Giro Donna", subtitle: "Lady's Turn", desc: "Giro della dama.", steps: "Lei gira su 3 tempi.", prep: "Tempo 4: Carico verso l'interno.", cmd: "Tempo 5: Apro verso l'esterno per il giro. Mano a 'pistola' o dita rilassate come perno.", intention: "Dinamica.", link: "https://bachatasteps.com/?search=lady+turn", videos: [b_links[1]], notes: "", deepSearch: "Efficacia dipende da Pre-Lead (tempo 4): 'carica' verso sx (Wind-up) per rilascio elastico. Errore: blocco gomito Follower. Mano Lead centrata su asse vertebrale Follower." },
+            { id: 'b9', type: 'bachata', tag: 'green', title: "Quadrati", subtitle: "Box Step", desc: "Figura geometrica.", steps: "Lato, Unisco, Avanti (1-3). Lato, Unisco, Indietro (5-7).", prep: "Tempo 8: Stop laterale.", cmd: "Tempo 3: Spingo col petto. Tempo 7: Traziono.", intention: "Struttura.", link: "https://bachatasteps.com/?search=box+step", videos: [], notes: "", deepSearch: "Geometria ovale per flusso (smussare angoli). Chiusura battiti pari (2, 6): piedi vicini ('brushing ankles'). Guida anticipata: corpo 'cade' direzione successiva prima del piede. Arretramento: leggera pressione 3 dita su palmo Follower ('gancio')." },
+            { id: 'b10', type: 'bachata', tag: 'yellow', title: "Punteo", subtitle: "Footwork / Diagonal", desc: "Giochi di piedi con braccia in diagonale.", steps: "Punte e incroci sul posto.", prep: "Tempo 8: Stacco la presa classica.", cmd: "Tempo 1: Le mani formano una diagonale (es. sx alta, dx bassa) mentre i piedi lavorano.", intention: "Dominican style.", link: "https://bachatasteps.com/?search=footwork", videos: [b_links[3]], notes: "", deepSearch: "" },
+            { id: 'b11', type: 'bachata', tag: 'red', title: "Abbraccio", subtitle: "Cuddle / Wrap", desc: "Posizione avvolta.", steps: "Lei ruota e finisce al fianco.", prep: "Tempo 4: Braccia basse.", cmd: "Tempo 5: Alzo sx, avvolgo dx in vita.", intention: "Intimità.", link: "https://bachatasteps.com/?search=cuddle", videos: [b_links[2]], notes: "", deepSearch: "Connessione laterale 'hip-to-hip'. Sincronizzare passi (es. stesso piede). Segnalare cambio peso con movimento bacino ('bumping'). Uscita: creare spazio allontanandosi prima di srotolare." },
+            { id: 'b12', type: 'bachata', tag: 'yellow', title: "Abbraccio + Ruoto", subtitle: "Cuddle Variation", desc: "Dall'abbraccio si ruota l'asse di coppia.", steps: "Rotazione sul posto insieme.", prep: "Tempo 8: Consolidare abbraccio.", cmd: "Tempo 1: Ruoto col busto mantenendo il contatto.", intention: "Vortice.", link: "https://bachatasteps.com/?search=cuddle", videos: [b_links[3]], notes: "", deepSearch: "Gestire rotazione: se si gira a destra, perno su piede destro. Uscita fluida con 'unwinding'." },
+            { id: 'b13', type: 'bachata', tag: 'darkgreen', title: "Slide", subtitle: "Deslizado", desc: "Scivolata laterale.", steps: "Passo lungo trascinato (1-2 o 1-2-3).", prep: "Tempo 8: Caricamento peso.", cmd: "Tempo 1: Spinta decisa laterale poi stop.", intention: "Estensione.", link: "https://bachatasteps.com/?search=slide", videos: [b_links[3]], notes: "", deepSearch: "Per sezioni Derecho o riff chitarra. Peso su punte (metatarsi) per scivolamento. Guida 'croccante' (crisp): segnale breve deciso poi rilassamento." },
+            { id: 'b14', type: 'bachata', tag: 'yellow', title: "Base Trattenuta", subtitle: "Delayed Basic / Close-Open-Close", desc: "Meccanica di chiusura e apertura elastica.", steps: "Chiudo (close) - Apro (open) - Chiudo (close) su tempi dilatati.", prep: "Tempo 8: Respiro profondo.", cmd: "Tensione elastica: trattengo la chiusura (resistenza), lascio aprire (rilascio), richiamo la chiusura.", intention: "Sensuale.", link: "https://bachatasteps.com/?search=hesitation", videos: [b_links[6]], notes: "", deepSearch: "" },
+            { id: 'b15', type: 'bachata', tag: 'green', title: "Incrocio Avanti", subtitle: "Front Cross", desc: "Passo incrociato davanti.", steps: "Piede incrocia davanti.", prep: "Tempo 8: Torsione busto.", cmd: "Tempo 1: Guido la curva verso la diagonale.", intention: "Eleganza.", link: "https://bachatasteps.com/?search=cross", videos: [b_links[4]], notes: "", deepSearch: "Estetica: ginocchia vicine ('thighs brushing'). Guida Direzionale: creare spazio arretrando/ruotando. Dissociazione: busto frontale mentre gambe incrociano." },
+            { id: 'b16', type: 'bachata', tag: 'green', title: "Incrocio Dietro", subtitle: "Back Cross", desc: "Passo incrociato dietro.", steps: "Piede dietro.", prep: "Tempo 8: Apro fianco.", cmd: "Tempo 1: Apro la 'porta' col busto.", intention: "Fluidità.", link: "https://bachatasteps.com/?search=hook", videos: [b_links[4]], notes: "", deepSearch: "Estetica: ginocchia vicine. Guida Direzionale: invadere spazio Follower ('walking into her space') per costringere all'incrocio posteriore. Dissociazione: busto frontale." },
+            { id: 'b17', type: 'bachata', tag: 'red', title: "Setenta con giro bacino", subtitle: "Setenta / Hammerlock Hip Roll", desc: "Figura con braccio dietro la schiena e isolamento.", steps: "Giro donna -> Blocco Hammerlock -> Stop -> Side-to-side -> Base -> Uscita.", prep: "Tempo 4: Preparo giro a dx.", cmd: "Giro e incastro. STOP. Guido isolamento laterale bacino (Sx-Dx) con la mano libera/frame. Riprendo base sul posto. Uscita con giro.", intention: "Sensualità.", link: "https://bachatasteps.com/?search=hammerlock", videos: [b_links[4]], notes: "", deepSearch: "Sicurezza spalla priorità assoluta. Mani basse (glutei/lombare), mai verso scapole. Non 'parcheggiare' braccia: usare avambraccio dx su gomito sx Follower per controllo. Uscita fluida (possibile Hair Comb)." },
+            { id: 'b18', type: 'bachata', tag: 'red', title: "Yoyo", subtitle: "Rolling Complex", desc: "Sequenza complessa di rotazioni a blocchi.", steps: "Giro + Cambio mano -> Mano sopra -> Turn 90° -> Continue 90° -> Exit + Doppia carezza.", prep: "Da posizione aperta.", cmd: "Giro donna, cambio presa (baciamano o incrocio). Alzo l'altra mano sopra la testa. Guido rotazioni a scatti di 90 gradi. Uscita srotolando con doppia carezza (testa/fianchi).", intention: "Molla.", link: "https://bachatasteps.com/?search=wrap", videos: [b_links[3]], notes: "", deepSearch: "" },
+            { id: 'b19', type: 'bachata', tag: 'red', title: "Schiena Donna", subtitle: "Shadow Position", desc: "Uomo dietro la donna con pause (breaks).", steps: "Passi speculari con stop musicali.", prep: "Entrata su giro. Contatto scapole.", cmd: "BREAK: Stop secco sul 4 o 8 (isolamento). USCITA: Trazione o spinta laterale decisa per farla tornare fronte.", intention: "Guida invisibile.", link: "https://bachatasteps.com/?search=shadow", videos: [b_links[6]], notes: "", deepSearch: "Connessione sternale o leggermente sfalsata (Seatbelt Hold). Guida: contatto avambraccio dx su busto ant. e mano sx. Visual Leading: muoversi nella visione periferica Follower. Uscita: preparare con cambio peso chiaro." },
+            { id: 'b20', type: 'bachata', tag: 'blue', title: "Onda", subtitle: "Body Wave", desc: "Movimento ondulatorio.", steps: "Piedi fermi, onda col corpo.", prep: "Tempo 8: Blocco piedi.", cmd: "Tempo 1: Mano guida testa-petto-bacino.", intention: "Flusso.", link: "https://bachatasteps.com/?search=body+wave", videos: [], notes: "", deepSearch: "Quintessenza Sensual. Principio 'Snake': sequenza logica (Testa->Ginocchia). Lead esegue onda speculare. Respirazione come telecomando: inspirazione=su (apertura), espirazione=giù (chiusura)." },
+            { id: 'b21', type: 'bachata', tag: 'blue', title: "Respiro", subtitle: "Breathing", desc: "Pausa connessa respirando insieme.", steps: "Nessun passo.", prep: "Stop totale.", cmd: "Inspiro ed espiro profondamente col torace a contatto.", intention: "Connessione profonda.", link: "https://bachatasteps.com/?search=connection", videos: [], notes: "", deepSearch: "" },
+            { id: 'b22', type: 'bachata', tag: 'yellow', title: "Cambio di Posto", subtitle: "Cross Body Lead", desc: "Scambio posizioni lineare.", steps: "1: Piccolo passo verso lei. 2: Indietro. 3: Tap. 5: Passo avanti deciso e scambio.", prep: "Tempo 1: Frame a V (apro a sx).", cmd: "Apro la porta a V. Mano schiena accompagna la donna.", intention: "Passaggio.", link: "https://bachatasteps.com/?options=showmove&moveid=1783", videos: [b_links[7]], notes: "", deepSearch: "Pietra angolare Floorcraft. Tempo 5: trasferimento peso deciso. Tecnica Vassoio (mano dx): accompagnare senza spingere aggressivamente, contatto costante. Mano sx: timone." },
+            { id: 'b23', type: 'bachata', tag: 'yellow', title: "Mezzo Quadrato", subtitle: "Half Box", desc: "Metà del passo quadrato.", steps: "Lato, Unisco, Avanti.", prep: "Tempo 8: Stop.", cmd: "Guido solo la prima metà del quadrato.", intention: "Struttura.", link: "https://bachatasteps.com/?search=madrid", videos: [b_links[8]], notes: "", deepSearch: "Musicalità e dinamica. Frame superiore stabile ('quiet upper body'). Segnale: cambio livello e intenzione diagonale. Disconnessione ritmica: passo 1 lungo/lento, sospensione 2, recupero veloce 3-4." },
+            { id: 'b24', type: 'bachata', tag: 'blue', title: "Ocho", subtitle: "Figure 8", desc: "Movimento delle anche a forma di otto.", steps: "Piedi fermi o piccoli.", prep: "Tempo 8: Blocco.", cmd: "Guido il bacino a disegnare un 8.", intention: "Isolamento.", link: "", videos: ['https://drive.google.com/file/d/1L2wNNGXT2NyDPmNx7zFNttLVCOGGGiPb/view?usp=drive_link'], notes: "", deepSearch: "Dissociazione Inferiore. Bloccare spalle Follower, usare proprie ginocchia per guidare bacino. Biomeccanica incrociata: ginocchio dx Lead avanti -> anca sx Follower giù/indietro. Sensibilità 'feeling the floor'." },
+            { id: 'b25', type: 'bachata', tag: 'darkgreen', title: "Base Laterale (Pendolo)", subtitle: "U-Movement Basic", desc: "Variazione con movimento del bacino a U e passi sul posto.", steps: "1-2: Bacino a U (avanti-indietro). 3-4: Passi sul posto. 5-6: Bacino a U. 7-8: Passi sul posto.", prep: "Tempo 8: Preparo oscillazione.", cmd: "Tempo 1: Guido oscillazione profonda bacino senza spostamento laterale ampio.", intention: "Gioco ritmico / Finta.", link: "", videos: ['https://drive.google.com/file/d/1L2wNNGXT2NyDPmNx7zFNttLVCOGGGiPb/view?usp=drive_link'], notes: "", deepSearch: "In questa variante (spesso chiamata erroneamente 'Pendolo'), il movimento 1-2 non è un passo laterale netto ma un'oscillazione del bacino che disegna una 'U' (o una culla) andando avanti e poi indietro (o viceversa), mantenendo i piedi quasi fermi. I tempi 3-4 sono passi piccoli sul posto (spesso sincopati) per recuperare il tempo. Simmetricamente per il 5-6-7-8. Crea l'effetto di una 'finta' di corpo perché il busto sembra partire ma i piedi restano lì." }
         ];
 
-        // --- STATE & STORAGE ---
+        // SALSA
+        const salsaMoves = [
+            { id: 's1', type: 'salsa', tag: 'green', title: "Alternato", subtitle: "Guapea / Basic", desc: "Il passo base della salsa cubana. Specchiarsi.", steps: "1-2-3: Uomo Sx indietro. 5-6-7: Uomo Dx avanti.", prep: "Tempo 8: Leggera compressione.", cmd: "Tempo 1: Tensione (estendo). Tempo 5: Compressione (palmi).", intention: "Elastico.", link: "", videos: [s_links[1]], notes: "", deepSearch: "Dinamica Elastica: non affondo posteriore ma trasferimento controllato sotto il baricentro. Evitare 'hand rocky thing' (rottura frame). Tempo 5: Compressione (palmo a palmo) per caricare energia per figura successiva." },
+            { id: 's2', type: 'salsa', tag: 'green', title: "Laterale", subtitle: "Side Step", desc: "Spostamento laterale.", steps: "1: Apro Sx. 5: Apro Dx.", prep: "Tempo 8: Centro.", cmd: "Tempo 1: Sposto il busto a lato.", intention: "Rottura.", link: "", videos: [s_links[1]], notes: "", deepSearch: "Passi piccoli! Non allargare troppo. Busto fermo, movimento di fianchi. Focus sul trasferimento peso completo." },
+            { id: 's3', type: 'salsa', tag: 'green', title: "Sul Posto", subtitle: "On the spot", desc: "Marciare sul posto.", steps: "Piedi sotto le spalle.", prep: "Rilascio tensione.", cmd: "Nessuna trazione, solo ritmo.", intention: "Terra.", link: "", videos: [s_links[1]], notes: "", deepSearch: "Piegare le ginocchia per generare movimento fianchi. Utile per recuperare tempo o spazi stretti." },
+            { id: 's4', type: 'salsa', tag: 'green', title: "Aperture", subtitle: "Open Break / Atrás", desc: "Apertura all'indietro.", steps: "1: Passo deciso indietro.", prep: "Tempo 8: Preparo spinta.", cmd: "Tempo 1: Estendo il braccio bloccando la spalla.", intention: "Esplosiva.", link: "", videos: [s_links[1]], notes: "", deepSearch: "Non 'braccio di gomma'. Spalla bloccata per trasmettere spinta. Frame solido." },
+            { id: 's5', type: 'salsa', tag: 'green', title: "Camminata Laterale", subtitle: "Paseo", desc: "Spostamento laterale in coppia chiusa.", steps: "Passo incrociato.", prep: "Posizione chiusa.", cmd: "Guida col busto e mano sulla schiena.", intention: "Unità.", link: "", videos: [s_links[2]], notes: "", deepSearch: "Uomo guida col busto. Distanza bacini costante." },
+            { id: 's6', type: 'salsa', tag: 'darkgreen', title: "Giro Donna", subtitle: "Vuelta Derecha", desc: "Giro semplice a destra.", steps: "Lei gira sul 5-6-7.", prep: "Tempo 3: Alzo mano Sx.", cmd: "Tempo 5: Disegno cerchio sopra la testa.", intention: "Rotazione.", link: "", videos: [s_links[2]], notes: "", deepSearch: "Pre-Lead (Wind-up): caricare verso sx sul 4. Non bloccare gomito Follower. Polso flessibile, dita a perno ('pistola'). Mano centrata su asse Follower." },
+            { id: 's7', type: 'salsa', tag: 'darkgreen', title: "Giro Uomo", subtitle: "Vuelta Izquierda", desc: "Giro a sinistra dell'uomo.", steps: "1: Apro. 2: Sotto. 3: Chiudo.", prep: "Tempo 1: Apro a sinistra.", cmd: "Lascio la mano o cambio dietro schiena.", intention: "Sorpresa.", link: "", videos: [s_links[2]], notes: "", deepSearch: "Mantenere connessione energetica (tensione positiva) nel braccio connesso anche di schiena. Spotting per evitare vertigini. Passi stretti." },
+            { id: 's8', type: 'salsa', tag: 'darkgreen', title: "Giro Uomo Sotto Braccio", subtitle: "Hook Turn", desc: "Giro a destra passando sotto il braccio.", steps: "Passo sotto il ponte.", prep: "Tempo 1: Alzo braccio.", cmd: "Mi abbasso con le gambe (non schiena).", intention: "Agilità.", link: "", videos: [s_links[2]], notes: "", deepSearch: "Piegarsi sulle gambe. Connessione morbida per non torcere polso dama." },
+            { id: 's9', type: 'salsa', tag: 'yellow', title: "Dile Que No", subtitle: "Cross Body Lead", desc: "Chiusura fondamentale.", steps: "1-2-3: Apro porta. 5-6-7: Chiudo.", prep: "Tempo 1: Apro telaio a sinistra.", cmd: "Tempo 5: Mano dx sulla schiena guida la chiusura.", intention: "Reset.", link: "", videos: [s_links[3]], notes: "", deepSearch: "Geometria curvilinea (non slot lineare). Tempo 5-6-7: Leader NON sta fermo, pivota busto verso dama accompagnandola. Mano dx avvolgente con leggera pressione centrifuga." },
+            { id: 's10', type: 'salsa', tag: 'yellow', title: "Dile Que Si", subtitle: "Guapea Reconnect / Saluto Guapo", desc: "Riconnessione in Guapea, variante con styling mano al petto.", steps: "Base alternata.", prep: "Dopo Dile Que No.", cmd: "Tempo 1: Rilascio sx, mano al petto. Mano dx schiena mantiene pressione.", intention: "Ripartenza / Guaperia.", link: "", videos: [s_links[3]], notes: "", deepSearch: "Styling Guapo: gesto deciso sul tempo 1. Guida meccanica: mano dx su scapola mantiene pressione costante durante passo indietro per garantire apertura sincrona." },
+            { id: 's11', type: 'salsa', tag: 'red', title: "Setenta", subtitle: "70", desc: "Figura complessa avvolta.", steps: "Giro donna avvolto + giro uomo.", prep: "Tempo 1: Inizio rotazione oraria donna.", cmd: "Mani a gancio, cambio mano dx-dx.", intention: "Intreccio.", link: "", videos: [s_links[5]], notes: "", deepSearch: "Punto critico: secondo ottavo (5-6-7). Leader DEVE eseguire Hook Turn attivo per sbrogliare braccia, non restare fermo. Girare attorno alla dama. Orientamento finale verso centro (in Rueda)." },
+            { id: 's12', type: 'salsa', tag: 'yellow', title: "Enchufla", subtitle: "Turn In", desc: "Scambio posto.", steps: "1-2-3: Carico. 5-6-7: Scambio.", prep: "Tempo 1: Traziono verso di me.", cmd: "Tempo 3: Alzo braccio. Tempo 5: Passo sotto.", intention: "Scambio.", link: "", videos: [s_links[6]], notes: "", deepSearch: "Tecnica Pivot: Dama pivota su piede sx (5-6), non cammina indietro. Leader crea corridoio, non tira dama addosso. In Rueda: chiudere orientati al centro per Dame." },
+            { id: 's13', type: 'salsa', tag: 'darkgreen', title: "Saluto Cubano", subtitle: "Styling", desc: "Gesto di stile.", steps: "Su base o camminata.", prep: "Libero.", cmd: "Tocco fronte/capello con la mano.", intention: "Sabor.", link: "", videos: [s_links[3]], notes: "", deepSearch: "Styling puro. Sorridere!" },
+            { id: 's14', type: 'salsa', tag: 'yellow', title: "Aguaea", subtitle: "Exhibela", desc: "Mettila in mostra.", steps: "Apertura donna a dx.", prep: "Posizione chiusa.", cmd: "Torsione busto a destra (apre) e sinistra (chiude).", intention: "Show off.", link: "", videos: [s_links[4]], notes: "", deepSearch: "Camminata Ovale (3/3): Dama avanza 1-2-3 disegnando arco, torna 5-6-7 completando ovale. NON è un giro sul posto. Leader estende braccio per 'mostrare'." },
+            { id: 's15', type: 'salsa', tag: 'red', title: "Aguaea con Vuelta", subtitle: "Sacala", desc: "Aguaea più giro esterno.", steps: "Aguaea + impulso giro.", prep: "Durante chiusura Aguaea.", cmd: "Impulso verso l'esterno per farla girare.", intention: "Lancio.", link: "", videos: [s_links[4]], notes: "", deepSearch: "Ritmo 4/2: Dama avanti 4 tempi (1-2-3-5) verso esterno, ritorno rapido 6-7. Effetto 'scattoso' e drammatico. Differenza con Exhibela (fluido)." },
+            { id: 's16', type: 'salsa', tag: 'red', title: "Enchufla Elegante", subtitle: "", desc: "Variazione di Enchufla.", steps: "Enchufla con styling.", prep: "Come Enchufla.", cmd: "Mano accompagna in modo più ampio.", intention: "Eleganza.", link: "", videos: [s_links[6]], notes: "", deepSearch: "" },
+            { id: 's17', type: 'salsa', tag: 'red', title: "Enchufla Doppia", subtitle: "Doble", desc: "Doppio scambio.", steps: "Enchufla ma senza lasciare presa, ripeto.", prep: "Tengo la mano.", cmd: "Ricarico subito dopo il primo scambio.", intention: "Continuità.", link: "", videos: [s_links[6]], notes: "", deepSearch: "Meccanica Stop & Go: Blocco elastico su tempo 5 (Check). Non urto rigido, ma molla che carica energia per il ritorno (Rebound)." },
+            { id: 's18', type: 'salsa', tag: 'red', title: "Gancio", subtitle: "Hook", desc: "Variazione Enchufla con aggancio.", steps: "Enchufla agganciando il gomito.", prep: "Durante Enchufla.", cmd: "Aggancio col gomito invece della mano.", intention: "Gioco.", link: "", videos: [s_links[6]], notes: "", deepSearch: "" },
+            { id: 's19', type: 'salsa', tag: 'red', title: "Sombrero", subtitle: "", desc: "Figura a due mani sopra la testa.", steps: "Mani incrociate che finiscono sulle spalle.", prep: "Mani incrociate.", cmd: "Porto le mani sulle spalle opposte (come un cappello).", intention: "Finale.", link: "", videos: [s_links[6]], notes: "", deepSearch: "Gestione altezze: alzare mani solo quando vicini (5-6-7). Variante Vacilala: dama gira 1-2-3 con mani basse, leader alza solo alla fine. Gomiti larghi ('ali') nella posa finale." }
+        ];
+
+        // RUEDA
+        const ruedaMoves = [
+            { id: 'r1', type: 'rueda', tag: 'green', title: "Dame", subtitle: "Dame una", desc: "Cambio dama semplice verso destra (senso antiorario).", steps: "Dile que no alla nuova dama.", prep: "Tempo 1/3: Chiamata.", cmd: "Tempo 5-6-7: Cambio fisico.", intention: "Rotazione cerchio.", link: "", videos: [], notes: "", deepSearch: "Timing Chiamata: anticipare azione (chiamare su 1 o 3). Leader si muove attivamente verso nuova dama a destra con Dile Que No deciso. Segnale: indice alzato." },
+            { id: 'r2', type: 'rueda', tag: 'green', title: "Dame Dos", subtitle: "Skip one", desc: "Salto una dama e prendo la successiva.", steps: "Corro verso la seconda dama.", prep: "Come Dame.", cmd: "Ignoro la prima dama e punto alla seconda.", intention: "Velocità / Distanza.", link: "", videos: [], notes: "", deepSearch: "Passo 'Afuera' (esterno) lungo su 5-6-7 per sorpassare traffico prima dama. Segnale: due dita." },
+            { id: 'r3', type: 'rueda', tag: 'yellow', title: "Enchufla", subtitle: "Plug", desc: "La dama passa sotto il braccio, l'uomo va alla prossima.", steps: "Enchufla classico -> Dame.", prep: "Traziono dama.", cmd: "Alzo braccio, lei passa sotto, io vado alla prossima.", intention: "Scambio.", link: "", videos: [], notes: "", deepSearch: "Sincronizzazione Collettiva: Tutti i leader devono scambiare contemporaneamente e trovarsi centro su 6-7. Implica cambio partner automatico salvo 'Quedate'." },
+            { id: 'r4', type: 'rueda', tag: 'yellow', title: "Enchufla Doble", subtitle: "Double Plug", desc: "Enchufla, stop, e di nuovo Enchufla.", steps: "Enchufla ma resto lì, poi ripeto.", prep: "Come Enchufla.", cmd: "Fermo la dama prima di lasciarla, ripeto il movimento.", intention: "Gioco.", link: "", videos: [], notes: "", deepSearch: "Coreografia di Gruppo: Blocco (tempo 5) visivamente identico per tutti ('Tutti dentro/fuori'). Segnale: pugno 'clacson' doppio." },
+            { id: 'r5', type: 'rueda', tag: 'red', title: "Cadena", subtitle: "Chain / Mantiene la mano", desc: "Catena continua di cambi dama senza lasciare le mani.", steps: "Cammino intrecciando le braccia.", prep: "Da posizione chiusa o cerchio.", cmd: "Offro la mano libera alla prossima dama prima di lasciare l'attuale.", intention: "Connessione continua.", link: "", videos: [], notes: "", deepSearch: "" },
+            { id: 'r6', type: 'rueda', tag: 'green', title: "Movimenti del Cerchio", subtitle: "Caminar / Pa'l Medio", desc: "Spostamenti collettivi del cerchio: tutti avanti, tutti indietro, tutti al centro, tutti fuori.", steps: "Camminata a tempo (1-3, 5-7).", prep: "Tempo 8: Attenzione alla chiamata.", cmd: "Vocale: 'Caminar' (Avanti), 'Atras' (Indietro), 'Pa'l Medio' (Centro), 'Para Afuera' (Esterno).", intention: "Coordinazione di gruppo.", link: "", videos: [], notes: "", deepSearch: "" }
+        ];
+
         let moves = [];
         let activeId = null;
-        const LS_KEY = 'bachata_db_data_v2'; 
+        let currentCategory = 'bachata';
+        let activeFilter = 'all'; // New Filter State
+        const LS_KEY = 'dance_db_data_v19'; // Version Bumped
 
-        // --- DOM Elements ---
         const els = {
             list: document.getElementById('moves-list'),
             sidebar: document.getElementById('sidebar'),
             detail: document.getElementById('move-detail'),
-            idDisplay: document.getElementById('detail-id'),
-            typeDisplay: document.getElementById('detail-type'),
+            categorySelect: document.getElementById('category-select'),
+            filterContainer: document.getElementById('filter-container'), // New
             title: document.getElementById('detail-title'),
             subtitle: document.getElementById('detail-subtitle'),
             desc: document.getElementById('detail-desc'),
-            link: document.getElementById('external-link'),
+            link: document.getElementById('ext-link'),
+            linkText: document.getElementById('ext-link-text'),
             linkEditContainer: document.getElementById('link-edit-container'),
             editLinkInput: document.getElementById('edit-link'),
-            editTypeInput: document.getElementById('edit-type'),
-            editTagInput: document.getElementById('edit-tag'),
             passi: document.getElementById('detail-passi'),
             prep: document.getElementById('detail-preparazione'),
             cmd: document.getElementById('detail-comando'),
             intention: document.getElementById('detail-intenzione'),
             deepSearch: document.getElementById('detail-deepsearch'),
+            deepSearchPlaceholder: document.getElementById('deepsearch-placeholder'),
+            idDisplay: document.getElementById('detail-id'),
+            categoryDisplay: document.getElementById('detail-category'),
+            detailColorTag: document.getElementById('detail-color-tag'),
+            detailTitleText: document.getElementById('detail-title-text'), // New
             videoInput: document.getElementById('video-input'),
             notesInput: document.getElementById('notes-input'),
             videoContainer: document.getElementById('saved-video-container'),
@@ -354,84 +447,145 @@
             searchInput: document.getElementById('search-input'),
             mobileMenu: document.getElementById('mobile-menu-btn'),
             closeSidebar: document.getElementById('close-sidebar-btn'),
-            backdrop: document.getElementById('sidebar-backdrop')
+            backdrop: document.getElementById('sidebar-backdrop'),
+            filterContainer: document.getElementById('filter-container')
         };
 
-        // --- INIT ---
         function init() {
             const savedData = localStorage.getItem(LS_KEY);
             if (savedData) {
                 moves = JSON.parse(savedData);
-                if (!Array.isArray(moves) || moves.length === 0) moves = JSON.parse(JSON.stringify(defaultMoves));
+                if (!Array.isArray(moves) || moves.length === 0) {
+                    moves = [...bachataMoves, ...salsaMoves, ...ruedaMoves];
+                }
             } else {
-                moves = JSON.parse(JSON.stringify(defaultMoves));
+                moves = [...bachataMoves, ...salsaMoves, ...ruedaMoves];
                 saveData(); 
             }
-
-            // Ensure compatibility if new fields missing
-            moves.forEach(m => {
-                if(!m.type) m.type = 'bachata';
-                if(!m.tag) m.tag = 'green';
-                if(!m.deepSearch) m.deepSearch = "";
-            });
-
-            renderList(moves);
-            if(moves.length > 0) loadMove(moves[0].id);
+            
+            renderList();
+            
+            const first = moves.find(m => m.type === currentCategory);
+            if(first) loadMove(first.id);
+            
             lucide.createIcons();
 
             els.searchInput.addEventListener('input', (e) => {
                 const term = e.target.value.toLowerCase();
-                const filtered = moves.filter(m =>
-                    m.title.toLowerCase().includes(term) ||
-                    m.subtitle.toLowerCase().includes(term)
-                );
-                renderList(filtered);
+                renderList(term);
             });
 
-            els.mobileMenu.addEventListener('click', openSidebar);
-            els.closeSidebar.addEventListener('click', closeSidebar);
-            els.backdrop.addEventListener('click', closeSidebar);
+            els.mobileMenu.addEventListener('click', () => {
+                els.sidebar.classList.remove('-translate-x-full');
+                els.backdrop.classList.remove('hidden');
+            });
+            const close = () => {
+                els.sidebar.classList.add('-translate-x-full');
+                els.backdrop.classList.add('hidden');
+            };
+            els.closeSidebar.addEventListener('click', close);
+            els.backdrop.addEventListener('click', close);
         }
 
-        function openSidebar() {
-            els.sidebar.classList.remove('-translate-x-full');
-            els.backdrop.classList.remove('hidden');
+        // --- FILTER LOGIC ---
+        function toggleFilter(filterType) {
+            if (activeFilter === filterType) {
+                activeFilter = 'all'; // Toggle off
+            } else {
+                activeFilter = filterType;
+            }
+            updateFilterUI();
+            renderList(els.searchInput.value);
         }
-        function closeSidebar() {
-            els.sidebar.classList.add('-translate-x-full');
-            els.backdrop.classList.add('hidden');
+
+        function updateFilterUI() {
+            const chips = document.querySelectorAll('.filter-chip');
+            chips.forEach(chip => {
+                if (chip.dataset.filter === activeFilter) {
+                    chip.classList.add('active', 'ring-2', 'ring-offset-1', 'ring-blue-400');
+                } else {
+                    chip.classList.remove('active', 'ring-2', 'ring-offset-1', 'ring-blue-400');
+                }
+            });
+        }
+
+        function filterMatches(move) {
+            if (activeFilter === 'all') return true;
+            
+            // Map chips to tags
+            switch(activeFilter) {
+                case 'base': return move.tag === 'green' || move.tag === 'darkgreen';
+                case 'slow': return move.tag === 'blue';
+                case 'figure': return move.tag === 'yellow';
+                case 'hard': return move.tag === 'red';
+                default: return true;
+            }
         }
 
         // --- CORE FUNCTIONS ---
+        function changeCategory() {
+            currentCategory = els.categorySelect.value;
+            els.searchInput.value = '';
+            activeFilter = 'all'; // Reset filter on category change
+            updateFilterUI();
+            renderList();
+            const first = moves.find(m => m.type === currentCategory);
+            if(first) loadMove(first.id);
+        }
+
         function saveData() {
             localStorage.setItem(LS_KEY, JSON.stringify(moves));
         }
 
-        function renderList(data) {
+        function renderList(searchTerm = '') {
             els.list.innerHTML = '';
-            data.forEach((move, index) => {
+            
+            const filtered = moves.filter(m => {
+                const matchesCat = m.type === currentCategory;
+                const matchesSearch = m.title.toLowerCase().includes(searchTerm) || 
+                                      m.subtitle.toLowerCase().includes(searchTerm);
+                const matchesFilter = filterMatches(m); // Apply tag filter
+                return matchesCat && matchesSearch && matchesFilter;
+            });
+
+            if(filtered.length === 0) {
+                els.list.innerHTML = '<p class="text-center text-gray-400 mt-4 text-sm">Nessuna mossa trovata</p>';
+                return;
+            }
+
+            filtered.forEach((move, index) => {
                 const isActive = move.id === activeId;
                 const div = document.createElement('div');
-                div.className = `p-4 cursor-pointer hover:bg-gray-50 border-l-4 border-transparent transition-all border-b border-gray-100 ${isActive ? 'active-move' : ''}`;
+                div.className = `cursor-pointer hover:bg-gray-50 border-b border-gray-100 flex items-stretch ${isActive ? 'active-move' : ''}`;
                 
-                // Determine Tag Color
-                const tagColorClass = `tag-${move.tag || 'green'}`;
-
                 div.onclick = () => {
                     loadMove(move.id);
-                    if (window.innerWidth < 768) closeSidebar();
+                    if (window.innerWidth < 768) {
+                        els.sidebar.classList.add('-translate-x-full');
+                        els.backdrop.classList.add('hidden');
+                    }
                 };
 
-                div.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold text-sm truncate pr-2 flex items-center gap-2">
-                            <span class="tag-dot ${tagColorClass}"></span>
-                            ${move.title}
-                        </span>
-                        ${(move.videos && move.videos.length > 0) ? '<i data-lucide="video" class="w-3 h-3 text-blue-300"></i>' : ''}
+                const stripe = document.createElement('div');
+                stripe.className = `w-1.5 flex-shrink-0 cat-${move.tag || 'gray-300'}`;
+                
+                const content = document.createElement('div');
+                content.className = "p-4 flex-1 flex justify-between items-center";
+                content.innerHTML = `
+                    <div class="flex items-center gap-2 overflow-hidden">
+                        <div class="flex flex-col overflow-hidden">
+                            <span class="font-bold text-sm truncate pr-2 flex items-center gap-2">
+                                <span class="opacity-50 text-xs w-5 text-right">${index + 1}.</span> 
+                                ${move.title}
+                            </span>
+                            <span class="text-xs ${isActive ? '' : 'text-gray-400'} truncate pl-7 mt-0.5">${move.subtitle}</span>
+                        </div>
                     </div>
-                    <p class="text-xs ${isActive ? '' : 'text-gray-400'} truncate pl-6 mt-0.5">${move.subtitle}</p>
+                    ${(move.videos && move.videos.length > 0) ? '<i data-lucide="video" class="w-3 h-3 text-blue-300 flex-shrink-0 ml-2"></i>' : ''}
                 `;
+
+                div.appendChild(stripe);
+                div.appendChild(content);
                 els.list.appendChild(div);
             });
             lucide.createIcons();
@@ -444,27 +598,34 @@
             if(!move) return;
 
             els.detail.classList.remove('hidden');
-            renderList(moves); 
+            renderList(els.searchInput.value); 
 
-            // Fill Fields
             els.idDisplay.innerText = move.id;
-            els.typeDisplay.innerText = move.type ? move.type.toUpperCase() : "BACHATA";
-            els.title.innerText = move.title;
+            els.categoryDisplay.innerText = move.type;
+            
+            // Set Title & Icon
+            els.detailTitleText.innerText = move.title;
+            
             els.subtitle.innerText = move.subtitle;
             els.desc.innerText = move.desc;
-
+            
             els.passi.innerText = move.steps;
             els.prep.innerText = move.prep;
             els.cmd.innerText = move.cmd;
             els.intention.innerText = move.intention;
             
-            // Deep Search (HTML)
-            els.deepSearch.innerHTML = move.deepSearch || "<em class='text-gray-400'>Nessuna analisi approfondita disponibile.</em>";
+            // DeepSearch Logic
+            if(move.deepSearch && move.deepSearch.trim() !== "") {
+                els.deepSearch.innerText = move.deepSearch;
+                els.deepSearch.classList.remove('hidden');
+                els.deepSearchPlaceholder.classList.add('hidden');
+            } else {
+                els.deepSearch.innerText = "";
+                els.deepSearch.classList.add('hidden');
+                els.deepSearchPlaceholder.classList.remove('hidden');
+            }
 
-            // Edit Fields Hidden Inputs
-            els.editLinkInput.value = move.link || "";
-            els.editTypeInput.value = move.type || "bachata";
-            els.editTagInput.value = move.tag || "green";
+            els.detailColorTag.className = `absolute top-0 right-0 w-24 h-24 transform translate-x-12 -translate-y-12 rotate-45 opacity-20 cat-${move.tag || 'gray-300'}`;
 
             if (move.link) {
                 els.link.href = move.link;
@@ -472,135 +633,157 @@
             } else {
                 els.link.classList.add('hidden');
             }
+            els.editLinkInput.value = move.link || "";
 
             els.notesInput.value = move.notes || "";
             renderVideos(move.videos || []);
-
+            
+            document.getElementById('ai-section').classList.add('hidden');
+            document.getElementById('ai-content').innerHTML = '';
+            
             document.getElementById('main-content').scrollTop = 0;
         }
 
         // --- EDITING ---
         let isEditing = false;
-
+        
         function toggleEditMode() {
             isEditing = true;
             els.detail.classList.add('editing');
-            els.editBtn.parentElement.classList.add('hidden');
+            
             els.editBtn.classList.add('hidden');
             els.editActions.classList.remove('hidden');
 
-            makeEditable(els.title, 'input');
+            // Use the text container for title edit
+            makeEditable(els.detailTitleText, 'input');
             makeEditable(els.subtitle, 'input');
             makeEditable(els.desc, 'textarea');
+            makeEditable(els.deepSearch, 'textarea'); // Make DeepSearch editable
+            // Force show deepsearch textarea even if empty
+            const deepSearchArea = els.deepSearch.querySelector('textarea');
+            if(deepSearchArea) {
+                els.deepSearch.classList.remove('hidden');
+                els.deepSearchPlaceholder.classList.add('hidden');
+            } else {
+                // If it was empty and hidden, show it now as textarea
+                els.deepSearch.innerText = ""; // Ensure clean slate
+                els.deepSearch.classList.remove('hidden');
+                makeEditable(els.deepSearch, 'textarea');
+                els.deepSearchPlaceholder.classList.add('hidden');
+            }
+
+
             makeEditable(els.passi, 'textarea');
             makeEditable(els.prep, 'textarea');
             makeEditable(els.cmd, 'textarea');
             makeEditable(els.intention, 'textarea');
-            
-            // Special handling for HTML content in Deep Search
-            makeEditable(els.deepSearch, 'textarea', true);
 
             els.link.classList.add('hidden');
             els.linkEditContainer.classList.remove('hidden');
         }
 
-        function makeEditable(element, type, isHTML = false) {
-            const currentText = isHTML ? element.innerHTML : element.innerText;
+        function makeEditable(element, type) {
+            const currentText = element.innerText;
             const input = document.createElement(type);
             input.className = 'edit-input';
             input.value = currentText;
-            if(type === 'textarea') input.rows = 6;
-            
-            // If it's Deep Search, make it taller
-            if(isHTML) input.rows = 15;
-
+            if(type === 'textarea') input.rows = 4;
             element.innerHTML = '';
             element.appendChild(input);
+        }
+
+        function getInputValue(element) {
+            const input = element.querySelector('.edit-input');
+            return input ? input.value : element.innerText;
         }
 
         function cancelEdit() {
             if(!isEditing) return;
             isEditing = false;
             els.detail.classList.remove('editing');
+            
             els.editBtn.classList.remove('hidden');
-            els.editBtn.parentElement.classList.remove('hidden');
             els.editActions.classList.add('hidden');
+            
             els.linkEditContainer.classList.add('hidden');
-            if(activeId) loadMove(activeId);
+            loadMove(activeId); 
         }
 
         function saveEdit() {
             const moveIndex = moves.findIndex(m => m.id === activeId);
             if (moveIndex === -1) return;
 
-            // Simple fields
-            moves[moveIndex].title = els.title.querySelector('.edit-input').value;
-            moves[moveIndex].subtitle = els.subtitle.querySelector('.edit-input').value;
-            moves[moveIndex].desc = els.desc.querySelector('.edit-input').value;
-            moves[moveIndex].steps = els.passi.querySelector('.edit-input').value;
-            moves[moveIndex].prep = els.prep.querySelector('.edit-input').value;
-            moves[moveIndex].cmd = els.cmd.querySelector('.edit-input').value;
-            moves[moveIndex].intention = els.intention.querySelector('.edit-input').value;
+            // Handle title which now has icon
+            const fullTitle = getInputValue(els.detailTitleText);
             
-            // Deep Search (HTML)
-            moves[moveIndex].deepSearch = els.deepSearch.querySelector('.edit-input').value;
+            moves[moveIndex].title = fullTitle; 
 
-            // Metadata
+            moves[moveIndex].subtitle = getInputValue(els.subtitle);
+            moves[moveIndex].desc = getInputValue(els.desc);
+            moves[moveIndex].deepSearch = getInputValue(els.deepSearch);
+            moves[moveIndex].steps = getInputValue(els.passi);
+            moves[moveIndex].prep = getInputValue(els.prep);
+            moves[moveIndex].cmd = getInputValue(els.cmd);
+            moves[moveIndex].intention = getInputValue(els.intention);
             moves[moveIndex].link = els.editLinkInput.value;
-            moves[moveIndex].type = els.editTypeInput.value;
-            moves[moveIndex].tag = els.editTagInput.value;
 
             saveData();
             isEditing = false;
             els.detail.classList.remove('editing');
+            
             els.editBtn.classList.remove('hidden');
-            els.editBtn.parentElement.classList.remove('hidden');
             els.editActions.classList.add('hidden');
+            
             els.linkEditContainer.classList.add('hidden');
-
+            
             loadMove(activeId);
         }
 
-        // --- CREATION & DELETION ---
         function createNewMove() {
-            const newId = "m" + Date.now();
+            const newId = Date.now().toString();
             const newMove = {
                 id: newId,
-                type: 'bachata',
+                type: currentCategory,
                 tag: 'green',
                 title: "Nuova Mossa",
-                subtitle: "Clicca modifica per iniziare",
-                desc: "Descrizione breve...",
-                steps: "Descrivi i passi...",
-                prep: "Descrivi la preparazione...",
-                cmd: "Descrivi il comando...",
-                intention: "Descrivi l'intenzione...",
+                subtitle: "Modifica per iniziare...",
+                desc: "...",
+                steps: "...",
+                prep: "...",
+                cmd: "...",
+                intention: "...",
                 link: "",
                 videos: [],
                 notes: "",
-                deepSearch: "Incolla qui l'analisi approfondita della Gem..."
+                deepSearch: ""
             };
             moves.unshift(newMove);
             saveData();
-            renderList(moves);
+            renderList();
             loadMove(newId);
             toggleEditMode();
-            if (window.innerWidth < 768) closeSidebar();
-        }
-
-        function deleteCurrentMove() {
-            if(!confirm("Sei sicuro di voler eliminare questa mossa?")) return;
-            moves = moves.filter(m => m.id !== activeId);
-            saveData();
-            if (moves.length > 0) {
-                renderList(moves);
-                loadMove(moves[0].id);
-            } else {
-                location.reload();
+            
+             if (window.innerWidth < 768) {
+                els.sidebar.classList.add('-translate-x-full');
+                els.backdrop.classList.add('hidden');
             }
         }
 
-        // --- PRIVATE DATA ---
+        function deleteCurrentMove() {
+            if(!confirm("Eliminare questa mossa?")) return;
+            moves = moves.filter(m => m.id !== activeId);
+            saveData();
+            
+            const next = moves.find(m => m.type === currentCategory);
+            renderList();
+            
+            if (next) {
+                loadMove(next.id);
+            } else {
+                els.detail.classList.add('hidden');
+            }
+        }
+
         function savePrivateNotes() {
             const move = moves.find(m => m.id === activeId);
             if (move) {
@@ -618,7 +801,7 @@
                 move.videos.push(url);
                 saveData();
                 renderVideos(move.videos);
-                renderList(moves);
+                renderList();
                 els.videoInput.value = '';
             }
         }
@@ -629,7 +812,7 @@
                 move.videos.splice(index, 1);
                 saveData();
                 renderVideos(move.videos);
-                renderList(moves);
+                renderList();
             }
         }
 
@@ -640,6 +823,7 @@
             videoList.forEach((url, idx) => {
                 const vidDiv = document.createElement('div');
                 vidDiv.className = "bg-gray-50 border border-gray-200 rounded-lg p-3 relative group";
+                
                 const youtubeID = getYoutubeID(url);
                 let content = '';
 
@@ -651,16 +835,16 @@
                     `;
                 } else {
                     content = `
-                        <a href="${url}" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline break-all mb-8 font-bold text-sm bg-white p-3 rounded border">
+                        <a href="${url}" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;" class="flex items-center gap-2 text-blue-600 hover:underline break-all mb-4 font-bold text-sm bg-white p-3 rounded border z-20 relative">
                             <i data-lucide="link" class="w-4 h-4 flex-shrink-0"></i>
-                            LINK ESTERNO
+                            ${url.includes('drive.google.com') ? 'VIDEO DRIVE' : 'LINK ESTERNO'}
                         </a>
                     `;
                 }
 
                 vidDiv.innerHTML = `
                     ${content}
-                    <button onclick="deleteVideo(${idx})" class="absolute top-2 right-2 bg-white text-red-500 p-2 rounded shadow hover:bg-red-50 transition-colors z-10" title="Rimuovi video">
+                    <button onclick="deleteVideo(${idx})" class="absolute top-2 right-2 bg-white text-red-500 p-2 rounded shadow hover:bg-red-50 transition-colors z-10" title="Rimuovi">
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                     </button>
                 `;
@@ -673,6 +857,108 @@
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        async function getEffectiveApiKey() {
+            if (apiKey) return apiKey;
+            
+            let storedKey = localStorage.getItem('gemini_api_key');
+            if (storedKey) return storedKey;
+            
+            const input = prompt("Per usare l'IA, serve una API Key di Google Gemini (gratuita su aistudio.google.com).\nInseriscila qui (verrà salvata nel browser):");
+            if (input) {
+                localStorage.setItem('gemini_api_key', input.trim());
+                return input.trim();
+            }
+            return null;
+        }
+
+        async function askGemini() {
+            const move = moves.find(m => m.id === activeId);
+            if (!move) return;
+
+            const aiSection = document.getElementById('ai-section');
+            const aiContent = document.getElementById('ai-content');
+            const aiLoading = document.getElementById('ai-loading');
+            const aiBtn = document.getElementById('ai-btn');
+
+            const effectiveKey = await getEffectiveApiKey();
+            if (!effectiveKey) {
+                alert("Chiave API mancante. Impossibile contattare l'IA.");
+                return;
+            }
+
+            aiSection.classList.remove('hidden');
+            aiContent.classList.add('hidden');
+            aiLoading.classList.remove('hidden');
+            aiBtn.disabled = true;
+            aiBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            const prompt = `Agisci come un maestro di ballo professionista di ${move.type}. Spiega in italiano la mossa: "${move.title}" (${move.subtitle}). 1. **Il Segreto**: Un consiglio tecnico fondamentale. 2. **Attenzione a...**: L'errore più comune. 3. **Challenge**: Una variante creativa. Sii conciso.`;
+
+            try {
+                const responseText = await callGeminiAPI(prompt, effectiveKey);
+                aiContent.innerHTML = marked.parse(responseText);
+                aiLoading.classList.add('hidden');
+                aiContent.classList.remove('hidden');
+            } catch (error) {
+                console.error(error);
+                aiContent.innerHTML = `<p class="text-red-500">Errore: ${error.message}. Verifica la tua chiave API.</p>`;
+                aiLoading.classList.add('hidden');
+                aiContent.classList.remove('hidden');
+            } finally {
+                aiBtn.disabled = false;
+                aiBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        async function callGeminiAPI(prompt, key) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${key}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            });
+            
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(moves, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dance_db_backup_${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function triggerImport() { document.getElementById('import-file').click(); }
+
+        function importData(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedMoves = JSON.parse(e.target.result);
+                    if (Array.isArray(importedMoves)) {
+                        if(confirm("Sovrascrivere i dati?")) {
+                            moves = importedMoves;
+                            saveData();
+                            changeCategory();
+                            alert("Fatto!");
+                        }
+                    } else alert("File non valido.");
+                } catch (err) { alert("Errore file: " + err); }
+                input.value = '';
+            };
+            reader.readAsText(file);
         }
 
         init();
