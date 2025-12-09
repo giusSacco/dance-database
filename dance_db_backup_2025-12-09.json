@@ -395,7 +395,7 @@
     "tag": "yellow",
     "title": "Mezzo Quadrato",
     "subtitle": "Half Box",
-    "desc": "\"Ferro di cavallo\": Passo indietro girandomi a destra, torno forntale, passo indietro girandomi a sx, torno frontale.",
+    "desc": "\"Ferro di cavallo\": Passo indietro girandomi a destra, torno frontale, passo indietro girandomi a sx, torno frontale.",
     "steps": "7 apro in diagonale a dx 8 unisco; 1-2 torno frontale, 3-4 mi giro a sinistra, 5-6 torno frontale; poi continuo o per uscire faccio 7-8 della base.",
     "prep": "Tempo 6 vado leggermente incontro e sul 7 apro in diagonale.",
     "cmd": "7 apro in diagonale (leggera spinta)",
@@ -410,7 +410,7 @@
   {
     "id": "b24",
     "type": "bachata",
-    "tag": "blue",
+    "tag": "red",
     "title": "Ocho",
     "subtitle": "Figure 8",
     "desc": "Movimento delle anche a forma di otto.",
@@ -450,9 +450,9 @@
     "title": "Alternato",
     "subtitle": "Guapea / Basic",
     "desc": "Il passo base della salsa cubana. Specchiarsi.",
-    "steps": "1-2-3: Uomo Sx indietro. 5-6-7: Uomo Dx avanti.",
+    "steps": "1-2-3: Uomo Sx avanti. 5-6-7: Uomo Dx indietro.",
     "prep": "Tempo 8: Leggera compressione.",
-    "cmd": "Tempo 1: Tensione (estendo). Tempo 5: Compressione (palmi).",
+    "cmd": "Tempo 1: compressione. Tempo 5: tensione",
     "intention": "Elastico.",
     "link": "",
     "videos": [
@@ -611,17 +611,17 @@
     "tag": "yellow",
     "title": "Dile Que Si",
     "subtitle": "Guapea Reconnect / Saluto Guapo",
-    "desc": "Riconnessione in Guapea, variante con styling mano al petto.",
-    "steps": "Base alternata.",
+    "desc": "Riconnessione in Guapea",
+    "steps": "1 indietro- 3 vado avanti alla sinistra del follower e prendo scapola",
     "prep": "Dopo Dile Que No.",
-    "cmd": "Tempo 1: Rilascio sx, mano al petto. Mano dx schiena mantiene pressione.",
+    "cmd": "Tempo 1: andando indietro creo tensione con la sinistra prima di andare avanti e girare la donna",
     "intention": "Ripartenza / Guaperia.",
     "link": "",
     "videos": [
       "https://drive.google.com/file/d/1Vodv5u5RgbdnG7Z7oVcs5d9OTeWH_lMB/view?usp=drive_link"
     ],
     "notes": "",
-    "deepSearch": "Styling Guapo: gesto deciso sul tempo 1. Guida meccanica: mano dx su scapola mantiene pressione costante durante passo indietro per garantire apertura sincrona."
+    "deepSearch": ""
   },
   {
     "id": "s11",
@@ -630,9 +630,9 @@
     "title": "Setenta",
     "subtitle": "70",
     "desc": "Figura complessa avvolta.",
-    "steps": "Giro donna avvolto + giro uomo.",
-    "prep": "Tempo 1: Inizio rotazione oraria donna.",
-    "cmd": "Mani a gancio, cambio mano dx-dx.",
+    "steps": "Giro donna avvolto (offro la mano) + simil-enchufla",
+    "prep": "passo base",
+    "cmd": "Tempo 3: alzo la mano sx per giro donna e offro la dx, poi simile all'enchufla e chiudo sul 7",
     "intention": "Intreccio.",
     "link": "",
     "videos": [
@@ -649,8 +649,8 @@
     "subtitle": "Turn In",
     "desc": "Scambio posto.",
     "steps": "1-2-3: Carico. 5-6-7: Scambio.",
-    "prep": "Tempo 1: Traziono verso di me.",
-    "cmd": "Tempo 3: Alzo braccio. Tempo 5: Passo sotto.",
+    "prep": "Tempo 1: Apro a sx e avanti con la mano e con il corpo.",
+    "cmd": "Tempo 1: apro in diagonale con braccio + corpo; Tempo 3: Alzo braccio e faccio passare la donna (a questo punto siamo schiena donna, leggermente sflasati), poi chiudo",
     "intention": "Scambio.",
     "link": "",
     "videos": [
@@ -665,17 +665,17 @@
     "tag": "darkgreen",
     "title": "Saluto Cubano",
     "subtitle": "Styling",
-    "desc": "Gesto di stile.",
-    "steps": "Su base o camminata.",
-    "prep": "Libero.",
-    "cmd": "Tocco fronte/capello con la mano.",
-    "intention": "Sabor.",
+    "desc": "Da posizione aperta (eg dopo dile que no)",
+    "steps": "123 Sx indietro; 567 Dx avanti. Sul 5 do il 5",
+    "prep": "Di le que no",
+    "cmd": "Tengo posizione aprta",
+    "intention": "Tensione e spinta",
     "link": "",
     "videos": [
       "https://drive.google.com/file/d/1Vodv5u5RgbdnG7Z7oVcs5d9OTeWH_lMB/view?usp=drive_link"
     ],
-    "notes": "",
-    "deepSearch": "Styling puro. Sorridere!"
+    "notes": "Sul 5 vado avanti e spingo per creare compressione",
+    "deepSearch": ""
   },
   {
     "id": "s14",
@@ -684,21 +684,21 @@
     "title": "Aguaea",
     "subtitle": "Exhibela",
     "desc": "Mettila in mostra.",
-    "steps": "Apertura donna a dx.",
+    "steps": "Passo incrociato e incrocio intenzione con follower.",
     "prep": "Posizione chiusa.",
-    "cmd": "Torsione busto a destra (apre) e sinistra (chiude).",
-    "intention": "Show off.",
+    "cmd": "Apro la donna a destra: apro con il piede sx ma spingo con la mano.",
+    "intention": "Ci cerchaimo ma sfuggiamo.",
     "link": "",
     "videos": [
       "https://drive.google.com/file/d/1Mq_VDYqlH7Hy_E9yLSbHXdpclXprAxhq/view?usp=drive_link"
     ],
-    "notes": "",
-    "deepSearch": "Camminata Ovale (3/3): Dama avanza 1-2-3 disegnando arco, torna 5-6-7 completando ovale. NON è un giro sul posto. Leader estende braccio per 'mostrare'."
+    "notes": "Guardo in basso come a voler cercare il culo prima che se ne vada via.",
+    "deepSearch": ""
   },
   {
     "id": "s15",
     "type": "salsa",
-    "tag": "red",
+    "tag": "yellow",
     "title": "Aguaea con Vuelta",
     "subtitle": "Sacala",
     "desc": "Aguaea più giro esterno.",
@@ -720,7 +720,7 @@
     "title": "Enchufla Elegante",
     "subtitle": "",
     "desc": "Variazione di Enchufla.",
-    "steps": "Enchufla con styling.",
+    "steps": "Enchufla ma sul 567 giro a dx con la mano alta passando sotto. 5 incrocio i piedi, 67 giro. ",
     "prep": "Come Enchufla.",
     "cmd": "Mano accompagna in modo più ampio.",
     "intention": "Eleganza.",
@@ -738,9 +738,9 @@
     "title": "Enchufla Doppia",
     "subtitle": "Doble",
     "desc": "Doppio scambio.",
-    "steps": "Enchufla ma senza lasciare presa, ripeto.",
-    "prep": "Tengo la mano.",
-    "cmd": "Ricarico subito dopo il primo scambio.",
+    "steps": "Enchufla ma fermo la dama sul 3 e la riporto indietro",
+    "prep": "come enchufla",
+    "cmd": "Mano sulla spalla al 3, spinta per tornare indietro al 5, poi enchufla per uscire.",
     "intention": "Continuità.",
     "link": "",
     "videos": [
@@ -755,11 +755,11 @@
     "tag": "red",
     "title": "Gancio",
     "subtitle": "Hook",
-    "desc": "Variazione Enchufla con aggancio.",
-    "steps": "Enchufla agganciando il gomito.",
+    "desc": "Variazione Enchufla con giro uomo a dx e cambio mano.",
+    "steps": "Enchufla ma sul 5 incrocio i piedi, 67 giro a dx e cambio la mano",
     "prep": "Durante Enchufla.",
-    "cmd": "Aggancio col gomito invece della mano.",
-    "intention": "Gioco.",
+    "cmd": "",
+    "intention": "",
     "link": "",
     "videos": [
       "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
@@ -775,9 +775,9 @@
     "subtitle": "",
     "desc": "Figura a due mani sopra la testa.",
     "steps": "Mani incrociate che finiscono sulle spalle.",
-    "prep": "Mani incrociate.",
-    "cmd": "Porto le mani sulle spalle opposte (come un cappello).",
-    "intention": "Finale.",
+    "prep": "123 cambio mano e mani incrociate (dx in alto e sx in basso).",
+    "cmd": "567 faccio girare la donna poco più di 360° e metto il mio braccio sulle sue spalle e viceversa, a mo' di arciere",
+    "intention": "",
     "link": "",
     "videos": [
       "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
