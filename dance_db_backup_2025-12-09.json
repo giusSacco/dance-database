@@ -1,0 +1,884 @@
+[
+  {
+    "id": "b1",
+    "type": "bachata",
+    "tag": "green",
+    "title": "Base",
+    "subtitle": "Basic Step",
+    "desc": "La base laterale classica.",
+    "steps": "1-3: Sx lato, Dx unisce, Sx lato.\n4: Tap.\n5-7: Dx lato, Sx unisce, Dx lato.\n8: Tap.",
+    "prep": "Nessuna specifica.",
+    "cmd": "Tempo 1: Sposto il mio intero busto laterale.",
+    "intention": "Terra. Disegnare un 'otto' con le anche.",
+    "link": "https://bachatasteps.com/?search=basic+step",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Criticità: gestione microscopica spazio e timing trasferimento carico. Errore comune: 'arm leading' (muovere braccia prima del corpo). Tecnica avanzata: visualizzare movimento come blocco unico, impulso dal core. Conteggi 4/8 (Tap): NON trasferire peso, tallone staccato, preservare energia potenziale. Connessione visiva: altezza occhi/spalla."
+  },
+  {
+    "id": "b2",
+    "type": "bachata",
+    "tag": "blue",
+    "title": "Sul Posto",
+    "subtitle": "In Place",
+    "desc": "Base statica per recuperare o marcare il ritmo.",
+    "steps": "Tap-step alternato senza traslare.",
+    "prep": "Tempo 4 o 8: Arresto l'inerzia laterale.",
+    "cmd": "Tempo 1: Rilasso la tensione del telaio.",
+    "intention": "Controllo.",
+    "link": "https://bachatasteps.com/?search=in+place",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b3",
+    "type": "bachata",
+    "tag": "blue",
+    "title": "Doppio Tempo",
+    "subtitle": "Double Time (Body Movement)",
+    "desc": "Movimento del corpo su musica lenta, senza passi reali.",
+    "steps": "Nessun passo, solo isolamento corporeo (anche/busto).",
+    "prep": "Rallentamento musicale.",
+    "cmd": "Blocco i piedi, muovo il busto/bacino a tempo doppio rispetto alla base.",
+    "intention": "Musicalità su parti lente.",
+    "link": "https://bachatasteps.com/?search=syncopated",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b4",
+    "type": "bachata",
+    "tag": "darkgreen",
+    "title": "Doppio Passo",
+    "subtitle": "Double Step",
+    "desc": "Due passi sullo stesso lato o punto.",
+    "steps": "Marco due volte a destra (o sinistra).",
+    "prep": "Tempo 4: Blocco il flusso.",
+    "cmd": "Tempo 1: 'Muro' con la mano per impedire lo spostamento.",
+    "intention": "Gioco. Sorpresa.",
+    "link": "https://bachatasteps.com/?search=double+step",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "Può essere utilizzato per cambiare fase e sincronizzarsi con la base della donna (e.g. nella schiena donna).",
+    "deepSearch": ""
+  },
+  {
+    "id": "b5",
+    "type": "bachata",
+    "tag": "green",
+    "title": "Avanti",
+    "subtitle": "Forward Basic",
+    "desc": "Base lineare avanti/indietro.",
+    "steps": "Uomo avanza sul 1, Donna indietreggia.",
+    "prep": "Tempo 8: Cambio peso leggermente sulle punte.",
+    "cmd": "Tempo 1: Spingo avanti con il petto. Tempo 5: Traziono indietro col telaio.",
+    "intention": "Dialogo.",
+    "link": "https://bachatasteps.com/?search=forward+basic",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Criticità: perdita tensione punti inversione (4-1, 8-5). Lead come ammortizzatore: assorbire energia e rimbalzare. Evitare 'pendolarismo' busto (leaning). Mano schiena: non afferrare, spinta distribuita base palmo."
+  },
+  {
+    "id": "b6",
+    "type": "bachata",
+    "tag": "darkgreen",
+    "title": "Giro Uomo Mano Bassa",
+    "subtitle": "Low Hand Turn",
+    "desc": "Giro semplice mantenendo le mani basse.",
+    "steps": "Giro sul 1-2-3 o 5-6-7.",
+    "prep": "Tempo 4: Caricamento laterale opposto.",
+    "cmd": "Tempo 1 o 5: Guida circolare all'altezza della vita.",
+    "intention": "Fluidità.",
+    "link": "https://bachatasteps.com/?search=turn",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b7",
+    "type": "bachata",
+    "tag": "darkgreen",
+    "title": "Giro Uomo Mano Alta",
+    "subtitle": "High Turn",
+    "desc": "Classico giro sottobraccio.",
+    "steps": "Giro sul 1-2-3 o 5-6-7.",
+    "prep": "Tempo 4: Alzo il braccio creando arco.",
+    "cmd": "Tempo 1 o 5: Disegno aureola sopra la testa.",
+    "intention": "Eleganza.",
+    "link": "https://bachatasteps.com/?search=turn",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b8",
+    "type": "bachata",
+    "tag": "darkgreen",
+    "title": "Giro Donna",
+    "subtitle": "Lady's Turn",
+    "desc": "Giro della dama.",
+    "steps": "Lei gira su 3 tempi.",
+    "prep": "Tempo 4: Carico verso l'interno.",
+    "cmd": "Tempo 5: Apro verso l'esterno per il giro. Mano a 'pistola' o dita rilassate come perno.",
+    "intention": "Dinamica.",
+    "link": "https://bachatasteps.com/?search=lady+turn",
+    "videos": [
+      "https://drive.google.com/file/d/1LV9hsizqZPcqDF-PAgrWySauIz3_Su1-/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Efficacia dipende da Pre-Lead (tempo 4): 'carica' verso sx (Wind-up) per rilascio elastico. Errore: blocco gomito Follower. Mano Lead centrata su asse vertebrale Follower."
+  },
+  {
+    "id": "b9",
+    "type": "bachata",
+    "tag": "green",
+    "title": "Quadrato",
+    "subtitle": "Box Step",
+    "desc": "Figura geometrica.",
+    "steps": "Lato, Unisco, Avanti (1-3). Lato, Unisco, Indietro (5-7).",
+    "prep": "Tempo 8: Stop laterale.",
+    "cmd": "Mani basse; Tempo 3: Spingo col petto. Tempo 7: Traziono.",
+    "intention": "Struttura.",
+    "link": "https://bachatasteps.com/?search=box+step",
+    "videos": [],
+    "notes": "",
+    "deepSearch": "Geometria ovale per flusso (smussare angoli). Chiusura battiti pari (2, 6): piedi vicini ('brushing ankles'). Guida anticipata: corpo 'cade' direzione successiva prima del piede. Arretramento: leggera pressione 3 dita su palmo Follower ('gancio')."
+  },
+  {
+    "id": "b10",
+    "type": "bachata",
+    "tag": "yellow",
+    "title": "Punteo",
+    "subtitle": "Footwork / Diagonal",
+    "desc": "Giochi di piedi con braccia in diagonale.",
+    "steps": "Punte e incroci sul posto.",
+    "prep": "Tempo 8: Stacco la presa classica.",
+    "cmd": "Tempo 1: Le mani formano una diagonale (es. sx alta, dx bassa) mentre i piedi lavorano.",
+    "intention": "Dominican style.",
+    "link": "https://bachatasteps.com/?search=footwork",
+    "videos": [
+      "https://drive.google.com/file/d/1CbbMqyHj-IXojAJKoq1SjkfnM76zsmXS/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b11",
+    "type": "bachata",
+    "tag": "red",
+    "title": "Abbraccio",
+    "subtitle": "Cuddle / Wrap",
+    "desc": "Posizione avvolta.",
+    "steps": "Lei ruota e finisce al fianco.",
+    "prep": "Tempo 4: Braccia basse.",
+    "cmd": "Tempo 5: Alzo sx, avvolgo dx in vita.",
+    "intention": "Intimità.",
+    "link": "https://bachatasteps.com/?search=cuddle",
+    "videos": [
+      "https://drive.google.com/file/d/1rOp5-IgKzGdVSJf5JnPUXHNaP67iKUV3/view?usp=drive_link"
+    ],
+    "notes": "Passi piccoli quando arrotolo e srotolo per facilitare la donna.",
+    "deepSearch": "Connessione laterale 'hip-to-hip'. Sincronizzare passi (es. stesso piede). Segnalare cambio peso con movimento bacino ('bumping'). Uscita: creare spazio allontanandosi prima di srotolare."
+  },
+  {
+    "id": "b12",
+    "type": "bachata",
+    "tag": "yellow",
+    "title": "Abbraccio + Ruoto",
+    "subtitle": "Cuddle Variation",
+    "desc": "Dall'abbraccio si ruota l'asse di coppia.",
+    "steps": "Rotazione sul posto insieme.",
+    "prep": "Tempo 8: Consolidare abbraccio.",
+    "cmd": "Tempo 1: Ruoto col busto mantenendo il contatto.",
+    "intention": "Vortice.",
+    "link": "https://bachatasteps.com/?search=cuddle",
+    "videos": [
+      "https://drive.google.com/file/d/1CbbMqyHj-IXojAJKoq1SjkfnM76zsmXS/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Gestire rotazione: se si gira a destra, perno su piede destro. Uscita fluida con 'unwinding'."
+  },
+  {
+    "id": "b13",
+    "type": "bachata",
+    "tag": "darkgreen",
+    "title": "Slide",
+    "subtitle": "Deslizado",
+    "desc": "Scivolata laterale.",
+    "steps": "Passo lungo trascinato (1-2 o 1-2-3).",
+    "prep": "Tempo 8: Caricamento peso.",
+    "cmd": "Tempo 1: Spinta decisa laterale poi stop.",
+    "intention": "Estensione.",
+    "link": "https://bachatasteps.com/?search=slide",
+    "videos": [
+      "https://drive.google.com/file/d/1CbbMqyHj-IXojAJKoq1SjkfnM76zsmXS/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Per sezioni Derecho o riff chitarra. Peso su punte (metatarsi) per scivolamento. Guida 'croccante' (crisp): segnale breve deciso poi rilassamento."
+  },
+  {
+    "id": "b14",
+    "type": "bachata",
+    "tag": "yellow",
+    "title": "Base Trattenuta",
+    "subtitle": "Delayed Basic / Close-Open-Close",
+    "desc": "Meccanica di chiusura e apertura elastica.",
+    "steps": "Chiudo (close) - Apro (open) - Chiudo (close) su tempi dilatati.",
+    "prep": "Tempo 8: Respiro profondo.",
+    "cmd": "Tensione elastica: trattengo la chiusura (resistenza), lascio aprire (rilascio), richiamo la chiusura.",
+    "intention": "Sensuale.",
+    "link": "https://bachatasteps.com/?search=hesitation",
+    "videos": [
+      "https://drive.google.com/file/d/1M-pasIthL5wLuSCwhOyx-NkP5DZgJGqQ/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b15",
+    "type": "bachata",
+    "tag": "green",
+    "title": "Incrocio Avanti",
+    "subtitle": "Front Cross",
+    "desc": "Passo incrociato davanti.",
+    "steps": "Piede incrocia davanti.",
+    "prep": "Tempo 8: Torsione busto.",
+    "cmd": "Tempo 1: Guido la curva verso la diagonale.",
+    "intention": "Eleganza.",
+    "link": "https://bachatasteps.com/?search=cross",
+    "videos": [
+      "https://drive.google.com/file/d/1r2TjL0cuHdR4TsJYegcrsz8sc7Si72uY/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Estetica: ginocchia vicine ('thighs brushing'). Guida Direzionale: creare spazio arretrando/ruotando. Dissociazione: busto frontale mentre gambe incrociano."
+  },
+  {
+    "id": "b16",
+    "type": "bachata",
+    "tag": "green",
+    "title": "Incrocio Dietro",
+    "subtitle": "Back Cross",
+    "desc": "Passo incrociato dietro.",
+    "steps": "Piede dietro.",
+    "prep": "Tempo 8: Apro fianco.",
+    "cmd": "Tempo 1: Apro la 'porta' col busto.",
+    "intention": "Fluidità.",
+    "link": "https://bachatasteps.com/?search=hook",
+    "videos": [
+      "https://drive.google.com/file/d/1r2TjL0cuHdR4TsJYegcrsz8sc7Si72uY/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Estetica: ginocchia vicine. Guida Direzionale: invadere spazio Follower ('walking into her space') per costringere all'incrocio posteriore. Dissociazione: busto frontale."
+  },
+  {
+    "id": "b17",
+    "type": "bachata",
+    "tag": "red",
+    "title": "Setenta con giro bacino",
+    "subtitle": "Setenta / Hammerlock Hip Roll",
+    "desc": "Figura con braccio dietro la schiena e isolamento.",
+    "steps": "Giro donna -> Blocco Hammerlock -> Stop -> Side-to-side (segui donna, più o meno) -> Base -> Uscita.",
+    "prep": "Tempo 4: Preparo giro a dx.",
+    "cmd": "Giro e incastro. STOP. Guido isolamento laterale bacino (Sx-Dx) con la mano libera/frame. Riprendo base sul posto. Uscita con giro.",
+    "intention": "Sensualità.",
+    "link": "https://bachatasteps.com/?search=hammerlock",
+    "videos": [
+      "https://drive.google.com/file/d/1r2TjL0cuHdR4TsJYegcrsz8sc7Si72uY/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Sicurezza spalla priorità assoluta. Mani basse (glutei/lombare), mai verso scapole. Non 'parcheggiare' braccia: usare avambraccio dx su gomito sx Follower per controllo. Uscita fluida (possibile Hair Comb)."
+  },
+  {
+    "id": "b18",
+    "type": "bachata",
+    "tag": "red",
+    "title": "Yoyo",
+    "subtitle": "Rolling Complex",
+    "desc": "Sequenza complessa di rotazioni a blocchi.",
+    "steps": "Giro + Cambio mano -> Mano sopra -> Turn 90° -> Continue 90° -> Exit + Doppia carezza.",
+    "prep": "Da posizione aperta.",
+    "cmd": "Giro donna, cambio presa (baciamano o incrocio). Alzo l'altra mano sopra la testa. Guido rotazioni a scatti di 90 gradi. Uscita srotolando con doppia carezza (testa/fianchi).",
+    "intention": "Molla.",
+    "link": "https://bachatasteps.com/?search=wrap",
+    "videos": [
+      "https://drive.google.com/file/d/1CbbMqyHj-IXojAJKoq1SjkfnM76zsmXS/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b19",
+    "type": "bachata",
+    "tag": "red",
+    "title": "Schiena Donna",
+    "subtitle": "Shadow Position",
+    "desc": "Uomo dietro la donna con pause (breaks).",
+    "steps": "Passi speculari con stop musicali.",
+    "prep": "Entrata su giro. Contatto scapole.",
+    "cmd": "BREAK: Stop secco sul 4 o 8 (isolamento). USCITA: Trazione o spinta laterale decisa per farla tornare fronte.",
+    "intention": "Guida invisibile.",
+    "link": "https://bachatasteps.com/?search=shadow",
+    "videos": [
+      "https://drive.google.com/file/d/1M-pasIthL5wLuSCwhOyx-NkP5DZgJGqQ/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Connessione sternale o leggermente sfalsata (Seatbelt Hold). Guida: contatto avambraccio dx su busto ant. e mano sx. Visual Leading: muoversi nella visione periferica Follower. Uscita: preparare con cambio peso chiaro."
+  },
+  {
+    "id": "b20",
+    "type": "bachata",
+    "tag": "blue",
+    "title": "Onda",
+    "subtitle": "Body Wave",
+    "desc": "Movimento ondulatorio.",
+    "steps": "Piedi fermi, onda col corpo.",
+    "prep": "Tempo 8: Blocco piedi.",
+    "cmd": "Tempo 1: Mano guida testa-petto-bacino.",
+    "intention": "Flusso.",
+    "link": "https://bachatasteps.com/?search=body+wave",
+    "videos": [],
+    "notes": "",
+    "deepSearch": "Quintessenza Sensual. Principio 'Snake': sequenza logica (Testa->Ginocchia). Lead esegue onda speculare. Respirazione come telecomando: inspirazione=su (apertura), espirazione=giù (chiusura)."
+  },
+  {
+    "id": "b21",
+    "type": "bachata",
+    "tag": "blue",
+    "title": "Respiro",
+    "subtitle": "Breathing",
+    "desc": "Pausa connessa respirando insieme.",
+    "steps": "Nessun passo.",
+    "prep": "Stop totale.",
+    "cmd": "Inspiro ed espiro profondamente col torace a contatto.",
+    "intention": "Connessione profonda.",
+    "link": "https://bachatasteps.com/?search=connection",
+    "videos": [],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b22",
+    "type": "bachata",
+    "tag": "yellow",
+    "title": "Cambio di Posto",
+    "subtitle": "Cross Body Lead",
+    "desc": "Scambio posizioni lineare.",
+    "steps": "1: Piccolo passo verso lei. 2: Indietro. 3: Tap. 5: Passo avanti deciso e scambio.",
+    "prep": "Tempo 1: Frame a V (apro a sx).",
+    "cmd": "Apro la porta a V. Mano schiena accompagna la donna.",
+    "intention": "Passaggio.",
+    "link": "https://bachatasteps.com/?options=showmove&moveid=1783",
+    "videos": [
+      "https://drive.google.com/file/d/1bOUQqphOk-ErEuuq3dY70qnNnjsz1XSQ/view?usp=drive_link"
+    ],
+    "notes": "2 passo piccolo. Alzo la mano sx.",
+    "deepSearch": "Pietra angolare Floorcraft. Tempo 5: trasferimento peso deciso. Tecnica Vassoio (mano dx): accompagnare senza spingere aggressivamente, contatto costante. Mano sx: timone."
+  },
+  {
+    "id": "b23",
+    "type": "bachata",
+    "tag": "yellow",
+    "title": "Mezzo Quadrato",
+    "subtitle": "Half Box",
+    "desc": "\"Ferro di cavallo\": Passo indietro girandomi a destra, torno forntale, passo indietro girandomi a sx, torno frontale.",
+    "steps": "7 apro in diagonale a dx 8 unisco; 1-2 torno frontale, 3-4 mi giro a sinistra, 5-6 torno frontale; poi continuo o per uscire faccio 7-8 della base.",
+    "prep": "Tempo 6 vado leggermente incontro e sul 7 apro in diagonale.",
+    "cmd": "7 apro in diagonale (leggera spinta)",
+    "intention": "Aperture",
+    "link": "https://bachatasteps.com/?search=madrid",
+    "videos": [
+      "https://drive.google.com/file/d/1MdS7Nb6Leyx6X1-ia0giEwaOw68xAvx5/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "b24",
+    "type": "bachata",
+    "tag": "blue",
+    "title": "Ocho",
+    "subtitle": "Figure 8",
+    "desc": "Movimento delle anche a forma di otto.",
+    "steps": "Piedi fermi o piccoli.",
+    "prep": "Tempo 8: Blocco.",
+    "cmd": "Guido il bacino a disegnare un 8.",
+    "intention": "Isolamento.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1L2wNNGXT2NyDPmNx7zFNttLVCOGGGiPb/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Dissociazione Inferiore. Bloccare spalle Follower, usare proprie ginocchia per guidare bacino. Biomeccanica incrociata: ginocchio dx Lead avanti -> anca sx Follower giù/indietro. Sensibilità 'feeling the floor'."
+  },
+  {
+    "id": "b25",
+    "type": "bachata",
+    "tag": "darkgreen",
+    "title": "Base Laterale (Pendolo)",
+    "subtitle": "U-Movement Basic",
+    "desc": "Variazione con movimento del bacino a U e passi sul posto.",
+    "steps": "1-2: Bacino a U (avanti-indietro). 3-4: Passi sul posto. 5-6: Bacino a U. 7-8: Passi sul posto.",
+    "prep": "Tempo 8: Preparo oscillazione.",
+    "cmd": "Tempo 1: Guido oscillazione profonda bacino senza spostamento laterale ampio.",
+    "intention": "Gioco ritmico / Finta.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1L2wNNGXT2NyDPmNx7zFNttLVCOGGGiPb/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "In questa variante (spesso chiamata erroneamente 'Pendolo'), il movimento 1-2 non è un passo laterale netto ma un'oscillazione del bacino che disegna una 'U' (o una culla) andando avanti e poi indietro (o viceversa), mantenendo i piedi quasi fermi. I tempi 3-4 sono passi piccoli sul posto (spesso sincopati) per recuperare il tempo. Simmetricamente per il 5-6-7-8. Crea l'effetto di una 'finta' di corpo perché il busto sembra partire ma i piedi restano lì."
+  },
+  {
+    "id": "s1",
+    "type": "salsa",
+    "tag": "green",
+    "title": "Alternato",
+    "subtitle": "Guapea / Basic",
+    "desc": "Il passo base della salsa cubana. Specchiarsi.",
+    "steps": "1-2-3: Uomo Sx indietro. 5-6-7: Uomo Dx avanti.",
+    "prep": "Tempo 8: Leggera compressione.",
+    "cmd": "Tempo 1: Tensione (estendo). Tempo 5: Compressione (palmi).",
+    "intention": "Elastico.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Erfo0sqzGKSR4L6Qjb0ywIwSU5WUGs57/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Dinamica Elastica: non affondo posteriore ma trasferimento controllato sotto il baricentro. Evitare 'hand rocky thing' (rottura frame). Tempo 5: Compressione (palmo a palmo) per caricare energia per figura successiva."
+  },
+  {
+    "id": "s2",
+    "type": "salsa",
+    "tag": "green",
+    "title": "Laterale",
+    "subtitle": "Side Step",
+    "desc": "Spostamento laterale.",
+    "steps": "1: Apro Sx. 5: Apro Dx.",
+    "prep": "Tempo 8: Centro.",
+    "cmd": "Tempo 1: Sposto il busto a lato.",
+    "intention": "Rottura.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Erfo0sqzGKSR4L6Qjb0ywIwSU5WUGs57/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Passi piccoli! Non allargare troppo. Busto fermo, movimento di fianchi. Focus sul trasferimento peso completo."
+  },
+  {
+    "id": "s3",
+    "type": "salsa",
+    "tag": "green",
+    "title": "Sul Posto",
+    "subtitle": "On the spot",
+    "desc": "Marciare sul posto.",
+    "steps": "Piedi sotto le spalle.",
+    "prep": "Rilascio tensione.",
+    "cmd": "Nessuna trazione, solo ritmo.",
+    "intention": "Terra.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Erfo0sqzGKSR4L6Qjb0ywIwSU5WUGs57/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Piegare le ginocchia per generare movimento fianchi. Utile per recuperare tempo o spazi stretti."
+  },
+  {
+    "id": "s4",
+    "type": "salsa",
+    "tag": "green",
+    "title": "Aperture",
+    "subtitle": "Open Break / Atrás",
+    "desc": "Apertura all'indietro.",
+    "steps": "1: Passo deciso indietro.",
+    "prep": "Tempo 8: Preparo spinta.",
+    "cmd": "Tempo 1: Estendo il braccio bloccando la spalla.",
+    "intention": "Esplosiva.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Erfo0sqzGKSR4L6Qjb0ywIwSU5WUGs57/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Non 'braccio di gomma'. Spalla bloccata per trasmettere spinta. Frame solido."
+  },
+  {
+    "id": "s5",
+    "type": "salsa",
+    "tag": "green",
+    "title": "Camminata Laterale",
+    "subtitle": "Paseo",
+    "desc": "Spostamento laterale in coppia chiusa.",
+    "steps": "Passi su 1-2-3; 5-6-7. Quando cambio direzione per andare a destra, primo passo comunque sx, poi destra.",
+    "prep": "Posizione chiusa.",
+    "cmd": "Guida col busto e mano sulla schiena.",
+    "intention": "Unità.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1wKyH6LaSGW5sHk2Va08o5e8mfjTtnXP3/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Uomo guida col busto. Distanza bacini costante."
+  },
+  {
+    "id": "s6",
+    "type": "salsa",
+    "tag": "darkgreen",
+    "title": "Giro Donna",
+    "subtitle": "Vuelta Derecha",
+    "desc": "Giro semplice a destra.",
+    "steps": "Lei gira sul 5-6-7.",
+    "prep": "Tempo 3: Alzo mano Sx.",
+    "cmd": "Tempo 5: Disegno cerchio sopra la testa.",
+    "intention": "Rotazione.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1wKyH6LaSGW5sHk2Va08o5e8mfjTtnXP3/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Pre-Lead (Wind-up): caricare verso sx sul 4. Non bloccare gomito Follower. Polso flessibile, dita a perno ('pistola'). Mano centrata su asse Follower."
+  },
+  {
+    "id": "s7",
+    "type": "salsa",
+    "tag": "darkgreen",
+    "title": "Giro Uomo",
+    "subtitle": "Vuelta Izquierda",
+    "desc": "Giro a sinistra dell'uomo.",
+    "steps": "1: Apro. 2: Sotto. 3: Chiudo.",
+    "prep": "Tempo 1: Apro a sinistra.",
+    "cmd": "Lascio la mano o cambio dietro schiena.",
+    "intention": "Sorpresa.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1wKyH6LaSGW5sHk2Va08o5e8mfjTtnXP3/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Mantenere connessione energetica (tensione positiva) nel braccio connesso anche di schiena. Spotting per evitare vertigini. Passi stretti."
+  },
+  {
+    "id": "s8",
+    "type": "salsa",
+    "tag": "darkgreen",
+    "title": "Giro Uomo Sotto Braccio",
+    "subtitle": "Hook Turn",
+    "desc": "Giro a destra passando sotto il braccio.",
+    "steps": "Passo sotto il ponte.",
+    "prep": "Tempo 1: Alzo braccio.",
+    "cmd": "Mi abbasso con le gambe (non schiena).",
+    "intention": "Agilità.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1wKyH6LaSGW5sHk2Va08o5e8mfjTtnXP3/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Piegarsi sulle gambe. Connessione morbida per non torcere polso dama."
+  },
+  {
+    "id": "s9",
+    "type": "salsa",
+    "tag": "yellow",
+    "title": "Dile Que No",
+    "subtitle": "Cross Body Lead",
+    "desc": "Chiusura fondamentale.",
+    "steps": "1-2-3: Apro porta. 5-6-7: Chiudo.",
+    "prep": "Tempo 1: Apro telaio a sinistra.",
+    "cmd": "Tempo 5: Mano dx sulla schiena guida la chiusura.",
+    "intention": "Reset.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Vodv5u5RgbdnG7Z7oVcs5d9OTeWH_lMB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Geometria curvilinea (non slot lineare). Tempo 5-6-7: Leader NON sta fermo, pivota busto verso dama accompagnandola. Mano dx avvolgente con leggera pressione centrifuga."
+  },
+  {
+    "id": "s10",
+    "type": "salsa",
+    "tag": "yellow",
+    "title": "Dile Que Si",
+    "subtitle": "Guapea Reconnect / Saluto Guapo",
+    "desc": "Riconnessione in Guapea, variante con styling mano al petto.",
+    "steps": "Base alternata.",
+    "prep": "Dopo Dile Que No.",
+    "cmd": "Tempo 1: Rilascio sx, mano al petto. Mano dx schiena mantiene pressione.",
+    "intention": "Ripartenza / Guaperia.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Vodv5u5RgbdnG7Z7oVcs5d9OTeWH_lMB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Styling Guapo: gesto deciso sul tempo 1. Guida meccanica: mano dx su scapola mantiene pressione costante durante passo indietro per garantire apertura sincrona."
+  },
+  {
+    "id": "s11",
+    "type": "salsa",
+    "tag": "red",
+    "title": "Setenta",
+    "subtitle": "70",
+    "desc": "Figura complessa avvolta.",
+    "steps": "Giro donna avvolto + giro uomo.",
+    "prep": "Tempo 1: Inizio rotazione oraria donna.",
+    "cmd": "Mani a gancio, cambio mano dx-dx.",
+    "intention": "Intreccio.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1vjNgAV7oL71EXeKYucR87oyo-Trj_tHU/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Punto critico: secondo ottavo (5-6-7). Leader DEVE eseguire Hook Turn attivo per sbrogliare braccia, non restare fermo. Girare attorno alla dama. Orientamento finale verso centro (in Rueda)."
+  },
+  {
+    "id": "s12",
+    "type": "salsa",
+    "tag": "yellow",
+    "title": "Enchufla",
+    "subtitle": "Turn In",
+    "desc": "Scambio posto.",
+    "steps": "1-2-3: Carico. 5-6-7: Scambio.",
+    "prep": "Tempo 1: Traziono verso di me.",
+    "cmd": "Tempo 3: Alzo braccio. Tempo 5: Passo sotto.",
+    "intention": "Scambio.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Tecnica Pivot: Dama pivota su piede sx (5-6), non cammina indietro. Leader crea corridoio, non tira dama addosso. In Rueda: chiudere orientati al centro per Dame."
+  },
+  {
+    "id": "s13",
+    "type": "salsa",
+    "tag": "darkgreen",
+    "title": "Saluto Cubano",
+    "subtitle": "Styling",
+    "desc": "Gesto di stile.",
+    "steps": "Su base o camminata.",
+    "prep": "Libero.",
+    "cmd": "Tocco fronte/capello con la mano.",
+    "intention": "Sabor.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Vodv5u5RgbdnG7Z7oVcs5d9OTeWH_lMB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Styling puro. Sorridere!"
+  },
+  {
+    "id": "s14",
+    "type": "salsa",
+    "tag": "yellow",
+    "title": "Aguaea",
+    "subtitle": "Exhibela",
+    "desc": "Mettila in mostra.",
+    "steps": "Apertura donna a dx.",
+    "prep": "Posizione chiusa.",
+    "cmd": "Torsione busto a destra (apre) e sinistra (chiude).",
+    "intention": "Show off.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Mq_VDYqlH7Hy_E9yLSbHXdpclXprAxhq/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Camminata Ovale (3/3): Dama avanza 1-2-3 disegnando arco, torna 5-6-7 completando ovale. NON è un giro sul posto. Leader estende braccio per 'mostrare'."
+  },
+  {
+    "id": "s15",
+    "type": "salsa",
+    "tag": "red",
+    "title": "Aguaea con Vuelta",
+    "subtitle": "Sacala",
+    "desc": "Aguaea più giro esterno.",
+    "steps": "Aguaea + impulso giro.",
+    "prep": "Durante chiusura Aguaea.",
+    "cmd": "Impulso verso l'esterno per farla girare.",
+    "intention": "Lancio.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1Mq_VDYqlH7Hy_E9yLSbHXdpclXprAxhq/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Ritmo 4/2: Dama avanti 4 tempi (1-2-3-5) verso esterno, ritorno rapido 6-7. Effetto 'scattoso' e drammatico. Differenza con Exhibela (fluido)."
+  },
+  {
+    "id": "s16",
+    "type": "salsa",
+    "tag": "red",
+    "title": "Enchufla Elegante",
+    "subtitle": "",
+    "desc": "Variazione di Enchufla.",
+    "steps": "Enchufla con styling.",
+    "prep": "Come Enchufla.",
+    "cmd": "Mano accompagna in modo più ampio.",
+    "intention": "Eleganza.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "s17",
+    "type": "salsa",
+    "tag": "red",
+    "title": "Enchufla Doppia",
+    "subtitle": "Doble",
+    "desc": "Doppio scambio.",
+    "steps": "Enchufla ma senza lasciare presa, ripeto.",
+    "prep": "Tengo la mano.",
+    "cmd": "Ricarico subito dopo il primo scambio.",
+    "intention": "Continuità.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Meccanica Stop & Go: Blocco elastico su tempo 5 (Check). Non urto rigido, ma molla che carica energia per il ritorno (Rebound)."
+  },
+  {
+    "id": "s18",
+    "type": "salsa",
+    "tag": "red",
+    "title": "Gancio",
+    "subtitle": "Hook",
+    "desc": "Variazione Enchufla con aggancio.",
+    "steps": "Enchufla agganciando il gomito.",
+    "prep": "Durante Enchufla.",
+    "cmd": "Aggancio col gomito invece della mano.",
+    "intention": "Gioco.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "s19",
+    "type": "salsa",
+    "tag": "red",
+    "title": "Sombrero",
+    "subtitle": "",
+    "desc": "Figura a due mani sopra la testa.",
+    "steps": "Mani incrociate che finiscono sulle spalle.",
+    "prep": "Mani incrociate.",
+    "cmd": "Porto le mani sulle spalle opposte (come un cappello).",
+    "intention": "Finale.",
+    "link": "",
+    "videos": [
+      "https://drive.google.com/file/d/1dS8KPUhwkO2e_Id_OAcWWMf4Y8zO5_gB/view?usp=drive_link"
+    ],
+    "notes": "",
+    "deepSearch": "Gestione altezze: alzare mani solo quando vicini (5-6-7). Variante Vacilala: dama gira 1-2-3 con mani basse, leader alza solo alla fine. Gomiti larghi ('ali') nella posa finale."
+  },
+  {
+    "id": "r1",
+    "type": "rueda",
+    "tag": "green",
+    "title": "Dame",
+    "subtitle": "Dame una",
+    "desc": "Cambio dama semplice verso destra (senso antiorario).",
+    "steps": "Dile que no alla nuova dama.",
+    "prep": "Tempo 1/3: Chiamata.",
+    "cmd": "Tempo 5-6-7: Cambio fisico.",
+    "intention": "Rotazione cerchio.",
+    "link": "",
+    "videos": [],
+    "notes": "",
+    "deepSearch": "Timing Chiamata: anticipare azione (chiamare su 1 o 3). Leader si muove attivamente verso nuova dama a destra con Dile Que No deciso. Segnale: indice alzato."
+  },
+  {
+    "id": "r2",
+    "type": "rueda",
+    "tag": "green",
+    "title": "Dame Dos",
+    "subtitle": "Skip one",
+    "desc": "Salto una dama e prendo la successiva.",
+    "steps": "Corro verso la seconda dama.",
+    "prep": "Come Dame.",
+    "cmd": "Ignoro la prima dama e punto alla seconda.",
+    "intention": "Velocità / Distanza.",
+    "link": "",
+    "videos": [],
+    "notes": "",
+    "deepSearch": "Passo 'Afuera' (esterno) lungo su 5-6-7 per sorpassare traffico prima dama. Segnale: due dita."
+  },
+  {
+    "id": "r3",
+    "type": "rueda",
+    "tag": "yellow",
+    "title": "Enchufla",
+    "subtitle": "Plug",
+    "desc": "La dama passa sotto il braccio, l'uomo va alla prossima.",
+    "steps": "Enchufla classico -> Dame.",
+    "prep": "Traziono dama.",
+    "cmd": "Alzo braccio, lei passa sotto, io vado alla prossima.",
+    "intention": "Scambio.",
+    "link": "",
+    "videos": [],
+    "notes": "",
+    "deepSearch": "Sincronizzazione Collettiva: Tutti i leader devono scambiare contemporaneamente e trovarsi centro su 6-7. Implica cambio partner automatico salvo 'Quedate'."
+  },
+  {
+    "id": "r4",
+    "type": "rueda",
+    "tag": "yellow",
+    "title": "Enchufla Doble",
+    "subtitle": "Double Plug",
+    "desc": "Enchufla, stop, e di nuovo Enchufla.",
+    "steps": "Enchufla ma resto lì, poi ripeto.",
+    "prep": "Come Enchufla.",
+    "cmd": "Fermo la dama prima di lasciarla, ripeto il movimento.",
+    "intention": "Gioco.",
+    "link": "",
+    "videos": [],
+    "notes": "",
+    "deepSearch": "Coreografia di Gruppo: Blocco (tempo 5) visivamente identico per tutti ('Tutti dentro/fuori'). Segnale: pugno 'clacson' doppio."
+  },
+  {
+    "id": "r5",
+    "type": "rueda",
+    "tag": "red",
+    "title": "Cadena",
+    "subtitle": "Chain / Mantiene la mano",
+    "desc": "Catena continua di cambi dama senza lasciare le mani.",
+    "steps": "Cammino intrecciando le braccia.",
+    "prep": "Da posizione chiusa o cerchio.",
+    "cmd": "Offro la mano libera alla prossima dama prima di lasciare l'attuale.",
+    "intention": "Connessione continua.",
+    "link": "",
+    "videos": [],
+    "notes": "",
+    "deepSearch": ""
+  },
+  {
+    "id": "r6",
+    "type": "rueda",
+    "tag": "green",
+    "title": "Movimenti del Cerchio",
+    "subtitle": "Caminar / Pa'l Medio",
+    "desc": "Spostamenti collettivi del cerchio: tutti avanti, tutti indietro, tutti al centro, tutti fuori.",
+    "steps": "Camminata a tempo (1-3, 5-7).",
+    "prep": "Tempo 8: Attenzione alla chiamata.",
+    "cmd": "Vocale: 'Caminar' (Avanti), 'Atras' (Indietro), 'Pa'l Medio' (Centro), 'Para Afuera' (Esterno).",
+    "intention": "Coordinazione di gruppo.",
+    "link": "",
+    "videos": [],
+    "notes": "",
+    "deepSearch": ""
+  }
+]
