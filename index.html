@@ -58,11 +58,11 @@
             <!-- Filters Bar -->
             <div class="flex gap-2 overflow-x-auto no-scrollbar mb-2 pb-1" id="filter-container">
                 <button onclick="toggleFilter('all')" class="filter-chip f-all active" data-filter="all">Tutti</button>
-                <button onclick="toggleFilter('green')" class="filter-chip f-green" data-filter="green">Basi</button>
-                <button onclick="toggleFilter('darkgreen')" class="filter-chip f-darkgreen" data-filter="darkgreen">Giri</button>
+                <button onclick="toggleFilter('green')" class="filter-chip f-green" data-filter="green">Pasitos</button>
+                <button onclick="toggleFilter('darkgreen')" class="filter-chip f-darkgreen" data-filter="darkgreen">Azioni</button>
                 <button onclick="toggleFilter('blue')" class="filter-chip f-blue" data-filter="blue">Lenti</button>
                 <button onclick="toggleFilter('yellow')" class="filter-chip f-yellow" data-filter="yellow">Figure</button>
-                <button onclick="toggleFilter('red')" class="filter-chip f-red" data-filter="red">Hard</button>
+                <button onclick="toggleFilter('red')" class="filter-chip f-red" data-filter="red">Combo</button>
             </div>
 
             <div class="relative mb-2">
@@ -157,18 +157,13 @@
 
                 <!-- Link Field & AI -->
                 <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 flex-wrap relative z-10">
-                    <a id="ext-link" href="#" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 font-medium px-4 py-2.5 rounded-lg transition-colors active:bg-gray-200">
-                        <i data-lucide="external-link" class="w-4 h-4 text-blue-500"></i>
-                        <span id="ext-link-text">Vedi riferimento</span>
+                    <a id="ext-link" href="#" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 font-medium px-4 py-2.5 rounded-lg transition-colors active:bg-blue-200">
+                        <i data-lucide="play-circle" class="w-4 h-4 text-blue-500"></i>
+                        <span id="ext-link-text">Video lezione</span>
                     </a>
 
-                    <button onclick="askGemini()" id="ai-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 text-sm bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold px-4 py-2.5 rounded-lg transition-colors shadow-sm">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i>
-                        Chiedi all'IA
-                    </button>
-
                     <div id="link-edit-container" class="hidden w-full">
-                        <input type="text" id="edit-link" placeholder="URL riferimento (es. https://...)" class="edit-input text-sm">
+                        <input type="text" id="edit-link" placeholder="URL video lezione (es. link Google Drive)" class="edit-input text-sm">
                     </div>
                 </div>
             </div>
@@ -283,6 +278,7 @@
         </div>
     </main>
 
+    <script>if(!localStorage.getItem('dance_db_reset_v1')){localStorage.removeItem('dance_db_data_v23');localStorage.setItem('dance_db_reset_v1','1');}</script>
     <script type="module" src="js/app.js"></script>
 </body>
 </html>
