@@ -33,6 +33,10 @@ function init() {
     renderFilterChips();
     renderList();
 
+    // Apri sidebar al primo caricamento su mobile
+    els.sidebar.classList.remove('-translate-x-full');
+    els.backdrop.classList.remove('hidden');
+
     const first = moves.find(m => m.type === currentCategory);
     if (first) loadMove(first.id);
 
