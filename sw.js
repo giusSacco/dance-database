@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dance-db-v1';
+const CACHE_NAME = 'dance-db-v2';
 const ASSETS = [
     './',
     './index.html',
