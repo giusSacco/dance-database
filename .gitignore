@@ -10,3 +10,10 @@ node_modules/
 # Editor files
 .vscode/
 .idea/
+
+# File personali / istruzioni Claude
+CLAUDE.md
+TODO.md
+
+# Backup locali
+.backups/

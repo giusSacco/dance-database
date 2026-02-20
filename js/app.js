@@ -9,6 +9,7 @@ import { toggleEditMode, saveEdit, cancelEdit } from './editor.js';
 import { addPrivateVideo, deleteVideo, savePrivateNotes } from './video.js';
 import { askGemini } from './ai.js';
 import { toggleFilter, updateFilterUI } from './ui.js';
+import { pushToGist, pullFromGist, resetGistConfig, copyGistId } from './gist.js';
 
 // Initialize DOM cache
 initElements();
@@ -77,6 +78,10 @@ window.exportData = exportData;
 window.triggerImport = triggerImport;
 window.importData = importData;
 window.askGemini = askGemini;
+window.pushToGist = pushToGist;
+window.pullFromGist = pullFromGist;
+window.resetGistConfig = resetGistConfig;
+window.copyGistId = copyGistId;
 
 // Register service worker for PWA
 if ('serviceWorker' in navigator) {

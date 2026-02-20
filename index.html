@@ -99,6 +99,23 @@
                 </button>
                 <input type="file" id="import-file" class="hidden" accept=".json" onchange="importData(this)">
             </div>
+            <h4 class="text-xs font-bold text-gray-500 uppercase mt-3 mb-2">Cloud (Gist)</h4>
+            <div class="flex gap-2">
+                <button id="gist-push-btn" onclick="pushToGist()" class="flex-1 bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 rounded-lg text-xs font-bold flex flex-col items-center gap-1 transition-colors shadow-sm">
+                    <i data-lucide="cloud-upload" class="w-4 h-4 text-violet-500"></i>
+                    Push
+                </button>
+                <button id="gist-pull-btn" onclick="pullFromGist()" class="flex-1 bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 rounded-lg text-xs font-bold flex flex-col items-center gap-1 transition-colors shadow-sm">
+                    <i data-lucide="cloud-download" class="w-4 h-4 text-teal-500"></i>
+                    Pull
+                </button>
+                <button onclick="copyGistId()" title="Copia Gist ID" class="bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 px-3 py-2 rounded-lg transition-colors shadow-sm">
+                    <i data-lucide="copy" class="w-4 h-4 text-gray-400"></i>
+                </button>
+                <button onclick="resetGistConfig()" title="Reimposta configurazione cloud" class="bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 px-3 py-2 rounded-lg transition-colors shadow-sm">
+                    <i data-lucide="settings" class="w-4 h-4 text-gray-400"></i>
+                </button>
+            </div>
         </div>
     </aside>
 
@@ -237,7 +254,7 @@
             <div class="bg-white rounded-xl shadow-sm p-5 md:p-6 border-l-4 border-purple-500">
                 <div class="flex items-center gap-2 mb-3">
                     <div class="p-1.5 bg-purple-100 rounded-lg text-purple-600"><i data-lucide="brain" class="w-5 h-5"></i></div>
-                    <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Approfondimento Tecnico (DeepSearch)</h4>
+                    <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Approfondimento Tecnico</h4>
                 </div>
                 <div class="field-wrapper bg-purple-50 p-4 rounded-lg border border-purple-100">
                     <p id="detail-deepsearch" class="text-gray-700 text-sm leading-relaxed whitespace-pre-line empty:hidden"></p>

@@ -1,7 +1,5 @@
 // Auto-generated from backup
-// Last updated: 2026-02-18
-
-import { b_links, s_links } from './default-links.js';
+// Last updated: 2026-02-19
 
 export const bachataMoves = [
   {
@@ -191,7 +189,7 @@ export const bachataMoves = [
     "desc": "Posizione avvolta.",
     "steps": "Come avanti. Quando si avvolge e si svolge meglio fare passi più piccoli.",
     "prep": "Tempo 4: Braccia basse.",
-    "cmd": "Tempo 5: Alzo sx, avvolgo dx in vita.",
+    "cmd": "Tempo 5: Alzo sx per giro donna, avvolgo dx in vita.",
     "intention": "Intimità.",
     "link": "https://drive.google.com/file/d/1rOp5-IgKzGdVSJf5JnPUXHNaP67iKUV3/view?usp=drive_link",
     "videos": [
@@ -293,7 +291,7 @@ export const bachataMoves = [
   {
     "id": "b17",
     "type": "bachata",
-    "tag": "red",
+    "tag": "yellow",
     "title": "Setenta con giro bacino",
     "subtitle": "Setenta / Hammerlock Hip Roll",
     "desc": "Guindo la rotazione dal basso. Figura con braccio dietro la schiena e isolamento.",
@@ -311,7 +309,7 @@ export const bachataMoves = [
   {
     "id": "b18",
     "type": "bachata",
-    "tag": "red",
+    "tag": "yellow",
     "title": "Yoyo",
     "subtitle": "Rolling Complex",
     "desc": "La donna passa da sx a dx formando 90°. Sequenza complessa di rotazioni a blocchi.",
@@ -329,7 +327,7 @@ export const bachataMoves = [
   {
     "id": "b19",
     "type": "bachata",
-    "tag": "red",
+    "tag": "yellow",
     "title": "Schiena Donna",
     "subtitle": "Shadow Position",
     "desc": "Guido il giro ma blocco a metà. Uomo dietro la donna con pause (breaks).",
@@ -379,7 +377,7 @@ export const bachataMoves = [
   {
     "id": "b22",
     "type": "bachata",
-    "tag": "yellow",
+    "tag": "darkgreen",
     "title": "Cambio di Posto",
     "subtitle": "Cross Body Lead",
     "desc": "Scambio posizioni lineare.",
@@ -455,12 +453,14 @@ export const bachataMoves = [
     "title": "Giro a bolla",
     "subtitle": "",
     "desc": "Sul 3 mi giro di 90°, poi completo il giro.",
-    "steps": "apro il 3 (o il 7) a sx, tap; 5-6-7  sono altri 90° ognuno",
+    "steps": "apro il 3 (o il 7) a sx, tap; 5-6-7 sono altri 90° ognuno",
     "prep": "",
     "cmd": "sul 3 mi apro, poi la mano va su mentre giro",
     "intention": "",
-    "link": "",
-    "videos": [],
+    "link": "https://drive.google.com/file/d/1hTCbXulPgaSDKi75qJcC3xWFiWNqFtkw/view?usp=drivesdk",
+    "videos": [
+      "https://drive.google.com/file/d/1hTCbXulPgaSDKi75qJcC3xWFiWNqFtkw/view?usp=drivesdk"
+    ],
     "notes": "",
     "deepSearch": ""
   },
@@ -475,8 +475,10 @@ export const bachataMoves = [
     "prep": "Tengo solo la mano esterna e preparo verso l'alto (respiro), poi guido giù e verso l'interno",
     "cmd": "mano giù e verso l'interno",
     "intention": "...",
-    "link": "",
-    "videos": [],
+    "link": "https://drive.google.com/file/d/1hTCbXulPgaSDKi75qJcC3xWFiWNqFtkw/view?usp=drivesdk",
+    "videos": [
+      "https://drive.google.com/file/d/1hTCbXulPgaSDKi75qJcC3xWFiWNqFtkw/view?usp=drivesdk"
+    ],
     "notes": "",
     "deepSearch": ""
   },
@@ -491,8 +493,10 @@ export const bachataMoves = [
     "prep": "come setenta: sx alto destra basso",
     "cmd": "la dx gira",
     "intention": "...",
-    "link": "",
-    "videos": [],
+    "link": "https://drive.google.com/file/d/1hTCbXulPgaSDKi75qJcC3xWFiWNqFtkw/view?usp=drivesdk",
+    "videos": [
+      "https://drive.google.com/file/d/1hTCbXulPgaSDKi75qJcC3xWFiWNqFtkw/view?usp=drivesdk"
+    ],
     "notes": "",
     "deepSearch": ""
   },
@@ -507,8 +511,10 @@ export const bachataMoves = [
     "prep": "...",
     "cmd": "...",
     "intention": "...",
-    "link": "",
-    "videos": [],
+    "link": "https://drive.google.com/file/d/1_Oku8xHDcRvPufxszksixMLwEBVocvna/view?usp=drivesdk",
+    "videos": [
+      "https://drive.google.com/file/d/1_Oku8xHDcRvPufxszksixMLwEBVocvna/view?usp=drivesdk"
+    ],
     "notes": "",
     "deepSearch": ""
   }
@@ -768,24 +774,6 @@ export const salsaMoves = [
     "deepSearch": ""
   },
   {
-    "id": "s15",
-    "type": "salsa",
-    "tag": "yellow",
-    "title": "Aguaea con Vuelta",
-    "subtitle": "Sacala",
-    "desc": "Solo uscita aguea(?)",
-    "steps": "Aguaea + impulso giro.",
-    "prep": "Durante chiusura Aguaea.",
-    "cmd": "Impulso verso l'esterno per farla girare.",
-    "intention": "Lancio.",
-    "link": "",
-    "videos": [
-      "https://drive.google.com/file/d/1Mq_VDYqlH7Hy_E9yLSbHXdpclXprAxhq/view?usp=drive_link"
-    ],
-    "notes": "",
-    "deepSearch": "Ritmo 4/2: Dama avanti 4 tempi (1-2-3-5) verso esterno, ritorno rapido 6-7. Effetto 'scattoso' e drammatico. Differenza con Exhibela (fluido)."
-  },
-  {
     "id": "s16",
     "type": "salsa",
     "tag": "darkgreen",
@@ -869,7 +857,9 @@ export const salsaMoves = [
     "cmd": "Blocco la dama sul 3",
     "intention": "Guardarsi, un po' cringe",
     "link": "https://drive.google.com/file/d/1dDnC-YPTKj69Z4BDD0Px50J1qIump-Zl/view?usp=drive_link",
-    "videos": [],
+    "videos": [
+      "https://drive.google.com/file/d/1dDnC-YPTKj69Z4BDD0Px50J1qIump-Zl/view?usp=drive_link"
+    ],
     "notes": "",
     "deepSearch": ""
   },
@@ -892,16 +882,18 @@ export const salsaMoves = [
   {
     "id": "s22",
     "type": "salsa",
-    "tag": "yellow",
-    "title": "Combo I2",
-    "subtitle": "Modifica per iniziare...",
-    "desc": "...",
-    "steps": "...",
-    "prep": "...",
-    "cmd": "...",
+    "tag": "red",
+    "title": "Combo I",
+    "subtitle": "",
+    "desc": "Dile que no, setenta con chiusura gomito, poi mi trovo di spalle, giro, bilancia, doppio giro donna",
+    "steps": "Dile que no + setenta con chiusura gomito; entro per dare le spalle con mano dx sulla mia spalla dx e sx dietro, 12 apro le gambe e abbasso la mano dx e 3 il piede sx si gira a sx per preparare il giro; 4567 giro per trovarmi di fronte; sx indietro mentre faccio bilancia; base alternata",
+    "prep": "",
+    "cmd": "",
     "intention": "...",
-    "link": "",
-    "videos": [],
+    "link": "https://drive.google.com/file/d/1z_RIWbdPHthEdncy_dBJPHOC8ea_8fkZ/view?usp=drivesdk",
+    "videos": [
+      "https://drive.google.com/file/d/1z_RIWbdPHthEdncy_dBJPHOC8ea_8fkZ/view?usp=drivesdk"
+    ],
     "notes": "",
     "deepSearch": ""
   }
@@ -943,7 +935,7 @@ export const ruedaMoves = [
   {
     "id": "r3",
     "type": "rueda",
-    "tag": "yellow",
+    "tag": "darkgreen",
     "title": "Enchufla",
     "subtitle": "Plug",
     "desc": "La dama passa sotto il braccio, l'uomo va alla prossima.",
@@ -975,7 +967,7 @@ export const ruedaMoves = [
   {
     "id": "r5",
     "type": "rueda",
-    "tag": "red",
+    "tag": "darkgreen",
     "title": "Cadena",
     "subtitle": "Chain / Mantiene la mano",
     "desc": "Catena continua di cambi dama senza lasciare le mani.",
