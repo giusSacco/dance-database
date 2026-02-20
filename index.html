@@ -65,6 +65,20 @@
                 <button onclick="toggleFilter('red')" class="filter-chip f-red" data-filter="red">Combo</button>
             </div>
 
+            <!-- Star Range Filter -->
+            <div class="mb-2">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Stelle</span>
+                    <span id="star-range-label" class="text-[11px] text-yellow-500 font-bold">tutte</span>
+                </div>
+                <div class="relative h-5 flex items-center">
+                    <div class="absolute inset-x-0 h-1.5 bg-gray-200 rounded-full"></div>
+                    <div id="star-track-fill" class="absolute h-1.5 bg-yellow-400 rounded-full" style="left:0%;width:100%"></div>
+                    <input type="range" id="star-min" min="0" max="5" value="0" class="range-thumb" oninput="updateStarFilter('min')">
+                    <input type="range" id="star-max" min="0" max="5" value="5" class="range-thumb" oninput="updateStarFilter('max')">
+                </div>
+            </div>
+
             <div class="relative mb-2">
                 <i data-lucide="search" class="absolute left-3 top-3 text-gray-400 w-4 h-4"></i>
                 <input type="text" id="search-input" placeholder="Cerca mossa..."
@@ -121,10 +135,102 @@
 
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto bg-gray-100 p-4 md:p-8 relative w-full" id="main-content">
+
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="max-w-4xl mx-auto pb-24 md:pb-20">
+            <!-- Hero -->
+            <div class="text-center py-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-2xl shadow-lg mb-5">
+                    <i data-lucide="music-2" class="w-10 h-10 text-white"></i>
+                </div>
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Dance DB</h1>
+                <p class="text-gray-500">Il tuo archivio personale di figure di ballo</p>
+            </div>
+
+            <!-- Category Stats -->
+            <div class="grid grid-cols-3 gap-3 md:gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm p-4 md:p-6 text-center border-t-4 border-blue-500 cursor-pointer hover:shadow-md transition-shadow" onclick="selectCategory('bachata')">
+                    <div id="welcome-count-bachata" class="text-3xl md:text-4xl font-extrabold text-blue-600">-</div>
+                    <div class="text-xs md:text-sm text-gray-500 font-semibold mt-1 uppercase tracking-wide">Bachata</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-4 md:p-6 text-center border-t-4 border-orange-500 cursor-pointer hover:shadow-md transition-shadow" onclick="selectCategory('salsa')">
+                    <div id="welcome-count-salsa" class="text-3xl md:text-4xl font-extrabold text-orange-500">-</div>
+                    <div class="text-xs md:text-sm text-gray-500 font-semibold mt-1 uppercase tracking-wide">Salsa Cubana</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-4 md:p-6 text-center border-t-4 border-green-500 cursor-pointer hover:shadow-md transition-shadow" onclick="selectCategory('rueda')">
+                    <div id="welcome-count-rueda" class="text-3xl md:text-4xl font-extrabold text-green-600">-</div>
+                    <div class="text-xs md:text-sm text-gray-500 font-semibold mt-1 uppercase tracking-wide">Salsa Rueda</div>
+                </div>
+            </div>
+
+            <!-- Random Move CTA -->
+            <div class="flex justify-center mb-8">
+                <button onclick="loadRandomMove()" class="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-8 py-3 rounded-xl font-bold text-base flex items-center gap-3 shadow-md transition-colors">
+                    <i data-lucide="shuffle" class="w-5 h-5"></i>
+                    Mossa Casuale
+                </button>
+            </div>
+
+            <!-- Quick Guide -->
+            <div class="bg-white rounded-xl shadow-sm p-5 md:p-6">
+                <h4 class="font-bold text-gray-500 text-xs uppercase tracking-widest mb-4">Guida rapida</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-600">
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 flex-shrink-0 w-6 h-6 flex items-center justify-center bg-blue-50 border border-blue-200 rounded text-blue-600">
+                            <i data-lucide="list" class="w-3.5 h-3.5"></i>
+                        </span>
+                        <span>Seleziona una mossa dalla sidebar sinistra</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 flex-shrink-0 w-6 h-6 flex items-center justify-center bg-blue-50 border border-blue-200 rounded text-blue-600">
+                            <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                        </span>
+                        <span>Cerca per nome con la barra di ricerca</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 flex-shrink-0 w-6 h-6 flex items-center justify-center bg-blue-50 border border-blue-200 rounded text-blue-600">
+                            <i data-lucide="tag" class="w-3.5 h-3.5"></i>
+                        </span>
+                        <span>Filtra per tipo usando i chip colorati</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="mt-0.5 flex-shrink-0 w-6 h-6 flex items-center justify-center bg-blue-50 border border-blue-200 rounded text-blue-600">
+                            <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                        </span>
+                        <span>Modifica qualsiasi scheda o crea nuove mosse personalizzate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact / Credit -->
+            <div class="mt-6 text-center text-xs text-gray-400 space-y-1">
+                <div>
+                    Segnala un problema:
+                    <a href="https://github.com/giusSacco/dance-database/issues" target="_blank" rel="noopener noreferrer"
+                       class="text-blue-500 hover:underline font-medium">apri una issue</a>
+                </div>
+                <div>
+                    Codice sorgente disponibile su
+                    <a href="https://github.com/giusSacco/dance-database" target="_blank" rel="noopener noreferrer"
+                       class="text-blue-500 hover:underline">giusSacco/dance-database</a>
+                </div>
+            </div>
+        </div>
+
         <div id="move-detail" class="max-w-4xl mx-auto space-y-6 pb-24 md:pb-20 hidden">
 
             <!-- Actions -->
-            <div class="flex flex-col sm:flex-row justify-end gap-2 mb-4">
+            <div class="flex items-start justify-between gap-2 mb-4">
+                <div class="flex items-center gap-2">
+                    <button id="back-btn" onclick="goBack()" title="Mossa precedente"
+                        class="hidden bg-white text-gray-400 border border-gray-200 px-3 py-2.5 rounded-lg text-sm hover:bg-gray-50 hover:text-gray-600 flex items-center gap-2 shadow-sm active:bg-gray-100 flex-shrink-0">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="showWelcome()" title="Torna alla home" class="bg-white text-gray-400 border border-gray-200 px-3 py-2.5 rounded-lg text-sm hover:bg-gray-50 hover:text-gray-600 flex items-center gap-2 shadow-sm active:bg-gray-100 flex-shrink-0">
+                        <i data-lucide="home" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2">
                 <button id="edit-btn" onclick="toggleEditMode()" class="bg-white text-gray-700 border border-gray-300 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-50 flex items-center justify-center gap-2 shadow-sm active:bg-gray-100">
                     <i data-lucide="pencil" class="w-4 h-4"></i> Modifica Scheda
                 </button>
@@ -138,6 +244,7 @@
                     <button onclick="cancelEdit()" class="bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-300 flex-1 sm:flex-none">
                         Annulla
                     </button>
+                </div>
                 </div>
             </div>
 
@@ -156,6 +263,10 @@
                                 <span id="tag-badge" class="px-2 py-1 rounded-md bg-gray-300 text-gray-900">-</span>
                             </div>
                             <div id="tag-editor" class="hidden mt-2 flex flex-wrap gap-2"></div>
+                        </div>
+                        <div class="mt-2 flex items-center gap-1">
+                            <span class="text-gray-400 text-[11px] uppercase tracking-wide mr-1">Confidenza</span>
+                            <div id="confidence-stars" class="flex"></div>
                         </div>
                         <div class="field-wrapper">
                             <h2 id="detail-title" class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1 leading-tight flex items-center gap-2">
@@ -259,6 +370,21 @@
                 <div class="field-wrapper bg-purple-50 p-4 rounded-lg border border-purple-100">
                     <p id="detail-deepsearch" class="text-gray-700 text-sm leading-relaxed whitespace-pre-line empty:hidden"></p>
                     <span id="deepsearch-placeholder" class="text-gray-400 text-xs italic">Nessuna nota extra. Modifica per aggiungere.</span>
+                </div>
+            </div>
+
+            <!-- Mosse Collegate -->
+            <div id="related-moves-section" class="hidden bg-white rounded-xl shadow-sm p-5 md:p-6 border-l-4 border-indigo-400">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="p-1.5 bg-indigo-100 rounded-lg text-indigo-600">
+                        <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide">Mosse Collegate</h4>
+                </div>
+                <div id="related-moves-chips" class="flex flex-wrap gap-2"></div>
+                <div id="related-moves-edit" class="hidden mt-3">
+                    <label class="block text-xs font-bold text-gray-500 mb-1 uppercase">ID mosse collegate (separati da virgola)</label>
+                    <input type="text" id="related-ids-input" placeholder="es. b3, s9, r2" class="edit-input text-sm">
                 </div>
             </div>
 

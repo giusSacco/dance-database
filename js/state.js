@@ -18,6 +18,12 @@ export function setActiveFilter(val) { activeFilter = val; }
 export function setIsEditing(val) { isEditing = val; }
 export function setTagMeta(val) { TAG_META = val; }
 
+// --- Navigation history (linked moves) ---
+export let navHistory = [];
+export function pushNavHistory(id) { navHistory.push(id); }
+export function popNavHistory() { return navHistory.pop(); }
+export function clearNavHistory() { navHistory = []; }
+
 // --- Constants ---
 export const LS_KEY = 'dance_db_data_v23';
 export const apiKeyConst = "";
@@ -62,6 +68,7 @@ export function initElements() {
         searchInput: document.getElementById('search-input'),
         mobileMenu: document.getElementById('mobile-menu-btn'),
         closeSidebar: document.getElementById('close-sidebar-btn'),
-        backdrop: document.getElementById('sidebar-backdrop')
+        backdrop: document.getElementById('sidebar-backdrop'),
+        backBtn: document.getElementById('back-btn')
     };
 }

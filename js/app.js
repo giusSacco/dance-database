@@ -1,14 +1,14 @@
-import { initElements, els, moves, setMoves, currentCategory } from './state.js';
+import { initElements, els, moves, setMoves, currentCategory, clearNavHistory } from './state.js';
 import { LS_KEY } from './state.js';
 import { bachataMoves, salsaMoves, ruedaMoves } from './data/default-moves.js';
 import { loadTagPalette, saveData, exportData, triggerImport, importData } from './storage.js';
-import { renderList, renderFilterChips } from './render.js';
+import { renderList, renderFilterChips, showWelcome } from './render.js';
 import { buildTagPicker } from './tags.js';
-import { loadMove, changeCategory, createNewMove, deleteCurrentMove } from './moves.js';
+import { loadMove, changeCategory, createNewMove, deleteCurrentMove, setConfidence, navigateToLinked, goBack } from './moves.js';
 import { toggleEditMode, saveEdit, cancelEdit } from './editor.js';
 import { addPrivateVideo, deleteVideo, savePrivateNotes } from './video.js';
 import { askGemini } from './ai.js';
-import { toggleFilter, updateFilterUI } from './ui.js';
+import { toggleFilter, updateFilterUI, updateStarFilter } from './ui.js';
 import { pushToGist, pullFromGist, resetGistConfig, copyGistId } from './gist.js';
 
 // Initialize DOM cache
@@ -38,8 +38,7 @@ function init() {
     els.sidebar.classList.remove('-translate-x-full');
     els.backdrop.classList.remove('hidden');
 
-    const first = moves.find(m => m.type === currentCategory);
-    if (first) loadMove(first.id);
+    showWelcome();
 
     lucide.createIcons();
 
@@ -61,9 +60,32 @@ function init() {
 }
 
 // Expose functions to HTML inline handlers
+window.showWelcome = function() {
+    clearNavHistory();
+    showWelcome();
+};
+
+window.loadRandomMove = function () {
+    const categoryMoves = moves.filter(m => m.type === currentCategory);
+    if (!categoryMoves.length) return;
+    const random = categoryMoves[Math.floor(Math.random() * categoryMoves.length)];
+    clearNavHistory();
+    loadMove(random.id);
+    if (window.innerWidth < 768) {
+        els.sidebar.classList.add('-translate-x-full');
+        els.backdrop.classList.add('hidden');
+    }
+};
+
+window.selectCategory = function (cat) {
+    els.categorySelect.value = cat;
+    changeCategory();
+};
+
 window.changeCategory = changeCategory;
 window.toggleFilter = toggleFilter;
 window.updateFilterUI = updateFilterUI;
+window.updateStarFilter = updateStarFilter;
 window.renderList = renderList;
 window.createNewMove = createNewMove;
 window.toggleEditMode = toggleEditMode;
@@ -71,6 +93,13 @@ window.saveEdit = saveEdit;
 window.cancelEdit = cancelEdit;
 window.deleteCurrentMove = deleteCurrentMove;
 window.loadMove = loadMove;
+window.navigateToLinked = navigateToLinked;
+window.goBack = goBack;
+window.navigateFresh = function(id) {
+    clearNavHistory();
+    loadMove(id);
+};
+window.setConfidence = setConfidence;
 window.addPrivateVideo = addPrivateVideo;
 window.deleteVideo = deleteVideo;
 window.savePrivateNotes = savePrivateNotes;

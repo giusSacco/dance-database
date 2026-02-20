@@ -50,6 +50,39 @@ input.edit-input, textarea.edit-input { width: 100%; border: 2px solid #3b82f6; 
 .filter-chip.active.f-blue { background-color: #3b82f6; }
 .filter-chip.active.f-yellow { background-color: #eab308; }
 .filter-chip.active.f-red { background-color: #ef4444; }
+/* Dual Range Slider */
+.range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    pointer-events: none;
+}
+.range-thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #eab308;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    cursor: pointer;
+    pointer-events: all;
+}
+.range-thumb::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #eab308;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    cursor: pointer;
+    pointer-events: all;
+}
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

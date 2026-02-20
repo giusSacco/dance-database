@@ -26,8 +26,7 @@ export function renderList(searchTerm = '') {
         div.className = `cursor-pointer hover:bg-gray-50 border-b border-gray-100 flex items-stretch ${isActive ? 'active-move' : ''}`;
 
         div.onclick = () => {
-            // loadMove is called via window binding to avoid circular import
-            window.loadMove(move.id);
+            window.navigateFresh(move.id);
             if (window.innerWidth < 768) {
                 els.sidebar.classList.add('-translate-x-full');
                 els.backdrop.classList.add('hidden');
@@ -54,6 +53,13 @@ export function renderList(searchTerm = '') {
 
         const right = document.createElement('div');
         right.className = 'flex items-center gap-2 flex-shrink-0';
+
+        if (move.confidence) {
+            const stars = document.createElement('span');
+            stars.className = 'text-yellow-400 text-[10px] leading-none tracking-tight';
+            stars.textContent = '★'.repeat(move.confidence);
+            right.appendChild(stars);
+        }
 
         if (move.videos && move.videos.length > 0) {
             const icon = document.createElement('i');
@@ -113,6 +119,22 @@ export function getYoutubeID(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
+}
+
+export function showWelcome() {
+    const ws = document.getElementById('welcome-screen');
+    if (!ws) return;
+    const bachata = moves.filter(m => m.type === 'bachata').length;
+    const salsa = moves.filter(m => m.type === 'salsa').length;
+    const rueda = moves.filter(m => m.type === 'rueda').length;
+    const elB = document.getElementById('welcome-count-bachata');
+    const elS = document.getElementById('welcome-count-salsa');
+    const elR = document.getElementById('welcome-count-rueda');
+    if (elB) elB.textContent = bachata;
+    if (elS) elS.textContent = salsa;
+    if (elR) elR.textContent = rueda;
+    ws.classList.remove('hidden');
+    els.detail.classList.add('hidden');
 }
 
 export function renderFilterChips() {

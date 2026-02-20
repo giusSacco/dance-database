@@ -36,6 +36,11 @@ export function toggleEditMode() {
 
     els.link.classList.add('hidden');
     els.linkEditContainer.classList.remove('hidden');
+
+    const relSection = document.getElementById('related-moves-section');
+    if (relSection) relSection.classList.remove('hidden');
+    const relEdit = document.getElementById('related-moves-edit');
+    if (relEdit) relEdit.classList.remove('hidden');
 }
 
 export function makeEditable(element, type) {
@@ -62,6 +67,8 @@ export function cancelEdit() {
     els.editActions.classList.add('hidden');
 
     els.linkEditContainer.classList.add('hidden');
+    const relEdit = document.getElementById('related-moves-edit');
+    if (relEdit) relEdit.classList.add('hidden');
     // loadMove via window to avoid circular import
     window.loadMove(activeId);
 }
@@ -83,6 +90,14 @@ export function saveEdit() {
     moves[moveIndex].link = els.editLinkInput.value;
     moves[moveIndex].tag = selectedTag;
 
+    const relInput = document.getElementById('related-ids-input');
+    if (relInput) {
+        const raw = relInput.value.trim();
+        moves[moveIndex].relatedIds = raw
+            ? raw.split(',').map(s => s.trim()).filter(Boolean)
+            : [];
+    }
+
     saveData();
     setIsEditing(false);
     els.detail.classList.remove('editing');
@@ -91,6 +106,8 @@ export function saveEdit() {
     els.editActions.classList.add('hidden');
 
     els.linkEditContainer.classList.add('hidden');
+    const relEditSave = document.getElementById('related-moves-edit');
+    if (relEditSave) relEditSave.classList.add('hidden');
 
     window.loadMove(activeId);
 }
