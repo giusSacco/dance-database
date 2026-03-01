@@ -2,7 +2,7 @@
 
 Un database personale per documentare e studiare le figure di ballo di coppia — Bachata, Salsa Cubana e Rueda de Casino.
 
-> Progetto personale e amatoriale, nato per uso proprio. Non è un progetto professionale, ma chiunque può usarlo per scrivere le proprie note e tenere traccia delle figure che sta imparando.
+> **Nota importante**: non sono un maestro di ballo e quest'app è da considerarsi come progetto amatoriale nato nel tempo libero per mio uso personale. Di conseguenza le mosse presenti non sono da considerarsi come materiale didattico ma come semplici appunti che ho raccolto e la manutenzione dell'app non è garantita. Detto questo, il database è personalizzabile, quindi sentiti libero di riempirlo con le tue mosse e farlo tuo!
 
 ## Cosa fa
 
@@ -47,6 +47,17 @@ I dati sono salvati nel browser (localStorage) e non vanno da nessuna parte auto
 
 - Usa il pulsante **Esporta** per scaricare un file JSON con tutte le tue figure e note
 - Usa **Importa** per ripristinarli su un altro dispositivo o dopo aver svuotato il browser
+
+---
+
+## Feedback e segnalazioni
+
+Hai trovato un bug? Hai un suggerimento per migliorare l'app? Vuoi contribuire al codice?
+
+- **Segnala un problema**: [apri una issue su GitHub](https://github.com/giusSacco/dance-database/issues)
+- **Codice sorgente**: [giusSacco/dance-database](https://github.com/giusSacco/dance-database)
+
+Feedback e contributi sono sempre benvenuti!
 
 ---
 
